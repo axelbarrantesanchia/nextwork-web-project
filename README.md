@@ -1452,7 +1452,7 @@ Es un mecanismo de seguridad que, si la etapa de Deploy falla, vuelve automátic
 
 
 ▶️  
-## ¡Ejecuta tu Pipeline!
+## Ejecuta tu Pipeline
 ¡Vamos a ver nuestro pipeline ejecutarse por primera vez! Esto nos ayudará a verificar que todo esté funcionando correctamente.
 ________________________________________
 En este paso vas a:
@@ -1480,7 +1480,7 @@ Espera a que la ejecución del pipeline termine. Puedes monitorear el estado de 
 Para ver detalles específicos de una etapa, haz clic en el enlace del Stage ID en la pestaña Executions. Por ejemplo, haz clic en el Stage ID de la etapa Source para ver detalles sobre la obtención del código fuente.
 
 🧪  
-## ¡Prueba tu Pipeline!
+## Prueba tu Pipeline
 Es hora de la prueba DEFINITIVA para este proyecto... ¡veamos cómo CodePipeline maneja un cambio en el código!
 Probar con un cambio en el código confirmará que nuestro pipeline se activa automáticamente y despliega nuestras actualizaciones.
 ________________________________________
