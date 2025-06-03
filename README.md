@@ -53,8 +53,8 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 26. 🧱 [Configura tu Pipeline](#configura-tu-pipeline)
 27. 🧬 [Configuración de las etapas de Source, Build y Deploy](#configuración-de-las-etapas-de-source-build-y-deploy)
 28. 🏗️ [Etapa Build (Construcción)](#etapa-build-construcción)
-29. ▶️ [¡Ejecuta tu Pipeline!](#¡ejecuta-tu-pipeline)
-30. 🧪 [¡Prueba tu Pipeline!](#¡prueba-tu-pipeline)
+29. ▶️ [¡Ejecuta tu Pipeline!](#ejecuta-tu-pipeline)
+30. 🧪 [¡Prueba tu Pipeline!](#prueba-tu-pipeline)
 
 
 ---
