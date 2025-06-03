@@ -25,37 +25,36 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 
 ## 📚 Índice de Contenidos
 
-1. [Configuración de la instancia EC2](#configuración-de-la-instancia-ec2) 
-2. [🧰 Instalación de Git en EC2](#🧰-instalación-de-git-en-ec2)  
-3. [🐙 Crear repositorio en GitHub](#🐙-crear-repositorio-en-github)  
-4. [📁 Inicializar repositorio Git en EC2](#📁-inicializar-repositorio-git-en-ec2)  
-5. [💾 Agregar, commitear y subir los cambios](#💾-agregar-commitear-y-subir-los-cambios)  
-6. [🔑 Autenticarse correctamente con GitHub](#🔑-autenticarse-correctamente-con-github)  
-7. [👤 Configurar identidad de Git](#👤-configurar-identidad-de-git)  
-8. [✅ Confirmar archivos en GitHub](#✅-confirmar-archivos-en-github)  
-9. [📜 Historial de commits](#📜-historial-de-commits)  
-10. [✍️ Segundo commit: edición de `index.jsp`](#✍️-segundo-commit-edición-de-indexjsp)  
-11. [📤 Subir los cambios al repositorio remoto](#📤-subir-los-cambios-al-repositorio-remoto)  
-12. [💡 Tip de productividad: No escribir el token cada vez](#💡-tip-de-productividad-no-escribir-el-token-cada-vez)  
-13. [🔍 Verifica tu cambio en GitHub](#🔍-verifica-tu-cambio-en-github)  
-14. [📦 Crear y Configurar un Repositorio en AWS CodeArtifact](#📦-crear-y-configurar-un-repositorio-en-aws-codeartifact)  
-15. [🔐 Crear una política IAM para acceso a CodeArtifact](#🔐-crear-una-política-iam-para-acceso-a-codeartifact)  
-16. [🔗 Adjuntar la política IAM y verificar la conexión a CodeArtifact](#🔗-adjuntar-la-política-iam-y-verificar-la-conexión-a-codeartifact)  
-17. [📦 See Packages in CodeArtifact!](#📦-see-packages-in-codeartifact)  
-18. [🔧 Connect CodeBuild to your GitHub Repository (continuación)](#🔧-connect-codebuild-to-your-github-repository-continuación)  
-19. [⚙️ Finish Setting Up Your CodeBuild Project](#⚙️-finish-setting-up-your-codebuild-project)  
-20. [🐞 Ejecutar la compilación y solucionar fallos](#🐞-ejecutar-la-compilación-y-solucionar-fallos)  
-21. [✅ Verificar compilación exitosa y artefactos](#✅-verificar-compilación-exitosa-y-artefactos)  
-22. [🚀 Despliegue de la Infraestructura de Producción con CloudFormation](#🚀-despliegue-de-la-infraestructura-de-producción-con-cloudformation)  
-23. [🧪 Prepare Deployment Scripts and AppSpec](#🧪-prepare-deployment-scripts-and-appspec)  
-24. [🛠️ Set Up CodeDeploy](#🛠️-set-up-codedeploy)  
-25. [🔍 Crear y Verificar el Despliegue](#🔍-crear-y-verificar-el-despliegue)  
-26. [🧱 Configura tu Pipeline](#🧱-configura-tu-pipeline)  
-27. [🧬 Configuración de las etapas de Source, Build y Deploy](#🧬-configuración-de-las-etapas-de-source-build-y-deploy)  
-28. [🏗️ Etapa Build (Construcción)](#🏗️-etapa-build-construcción)  
-29. [▶️ ¡Ejecuta tu Pipeline!](#▶️-¡ejecuta-tu-pipeline)  
-30. [🧪 ¡Prueba tu Pipeline!](#🧪-¡prueba-tu-pipeline)
-
+1. 🖥️ [Configuración de la instancia EC2](#configuración-de-la-instancia-ec2)
+2. 🧰 [Instalación de Git en EC2](#instalación-de-git-en-ec2)
+3. 🐙 [Crear repositorio en GitHub](#crear-repositorio-en-github)
+4. 📁 [Inicializar repositorio Git en EC2](#inicializar-repositorio-git-en-ec2)
+5. 💾 [Agregar, commitear y subir los cambios](#agregar-commitear-y-subir-los-cambios)
+6. 🔑 [Autenticarse correctamente con GitHub](#autenticarse-correctamente-con-github)
+7. 👤 [Configurar identidad de Git](#configurar-identidad-de-git)
+8. ✅ [Confirmar archivos en GitHub](#confirmar-archivos-en-github)
+9. 📜 [Historial de commits](#historial-de-commits)
+10. ✍️ [Segundo commit: edición de `index.jsp`](#segundo-commit-edición-de-indexjsp)
+11. 📤 [Subir los cambios al repositorio remoto](#subir-los-cambios-al-repositorio-remoto)
+12. 💡 [Tip de productividad: No escribir el token cada vez](#tip-de-productividad-no-escribir-el-token-cada-vez)
+13. 🔍 [Verifica tu cambio en GitHub](#verifica-tu-cambio-en-github)
+14. 📦 [Crear y Configurar un Repositorio en AWS CodeArtifact](#crear-y-configurar-un-repositorio-en-aws-codeartifact)
+15. 🔐 [Crear una política IAM para acceso a CodeArtifact](#crear-una-política-iam-para-acceso-a-codeartifact)
+16. 🔗 [Adjuntar la política IAM y verificar la conexión a CodeArtifact](#adjuntar-la-política-iam-y-verificar-la-conexión-a-codeartifact)
+17. 📦 [See Packages in CodeArtifact!](#see-packages-in-codeartifact)
+18. 🔧 [Connect CodeBuild to your GitHub Repository (continuación)](#connect-codebuild-to-your-github-repository-continuación)
+19. ⚙️ [Finish Setting Up Your CodeBuild Project](#finish-setting-up-your-codebuild-project)
+20. 🐞 [Ejecutar la compilación y solucionar fallos](#ejecutar-la-compilación-y-solucionar-fallos)
+21. ✅ [Verificar compilación exitosa y artefactos](#verificar-compilación-exitosa-y-artefactos)
+22. 🚀 [Despliegue de la Infraestructura de Producción con CloudFormation](#despliegue-de-la-infraestructura-de-producción-con-cloudformation)
+23. 🧪 [Prepare Deployment Scripts and AppSpec](#prepare-deployment-scripts-and-appspec)
+24. 🛠️ [Set Up CodeDeploy](#set-up-codedeploy)
+25. 🔍 [Crear y Verificar el Despliegue](#crear-y-verificar-el-despliegue)
+26. 🧱 [Configura tu Pipeline](#configura-tu-pipeline)
+27. 🧬 [Configuración de las etapas de Source, Build y Deploy](#configuración-de-las-etapas-de-source-build-y-deploy)
+28. 🏗️ [Etapa Build (Construcción)](#etapa-build-construcción)
+29. ▶️ [¡Ejecuta tu Pipeline!](#¡ejecuta-tu-pipeline)
+30. 🧪 [¡Prueba tu Pipeline!](#¡prueba-tu-pipeline)
 
 
 ---
@@ -64,6 +63,7 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 
 ---
 
+🖥️
 ## Configuración de la instancia EC2
 
 Desde la consola de AWS:
@@ -90,7 +90,8 @@ Desde la consola de AWS:
 
 ---
 
-## 🧰 Instalación de Git en EC2
+🧰  
+## Instalación de Git en EC2
 
 Abre la terminal en tu instancia EC2 y ejecuta:
 
@@ -104,7 +105,8 @@ git --version
 
 ---
 
-## 🐙 Crear repositorio en GitHub
+🐙  
+## Crear repositorio en GitHub
 
 Desde [https://github.com](https://github.com):
 
@@ -115,7 +117,8 @@ Desde [https://github.com](https://github.com):
 
 ---
 
-## 📁 Inicializar repositorio Git en EC2
+📁  
+## Inicializar repositorio Git en EC2
 
 Desde la terminal:
 
@@ -132,7 +135,8 @@ git remote add origin https://github.com/tuusuario/nextwork-web-project.git
 
 ---
 
-## 💾 Agregar, commitear y subir los cambios
+💾  
+## Agregar, commitear y subir los cambios
 
 
 git add .
@@ -142,8 +146,8 @@ git push -u origin master
 
 
 ---
-
-## 🔑 Autenticarse correctamente con GitHub
+🔑  
+## Autenticarse correctamente con GitHub
 GitHub ya no acepta contraseñas normales por HTTPS. Debes usar un **Personal Access Token (PAT)**:
 
 Desde GitHub:
@@ -159,7 +163,8 @@ Al hacer `git push`, ingresa:
 
 ---
 
-## 👤 Configurar identidad de Git
+👤  
+## Configurar identidad de Git
 
 
 git config --global user.name "Axel Andres Barrantes Anchia"
@@ -169,7 +174,8 @@ git config --global --list
 
 ---
 
-## ✅ Confirmar archivos en GitHub
+✅  
+## Confirmar archivos en GitHub
 
 Visita tu repositorio y deberías ver:
 
@@ -179,11 +185,10 @@ Visita tu repositorio y deberías ver:
 
 ---
 
-## 📜 Historial de commits
-
+📜  
+## Historial de commits
 
 git log
-
 
 Muestra:
 
@@ -194,7 +199,8 @@ Muestra:
 
 ---
 
-## ✍️ Segundo commit: edición de `index.jsp`
+✍️  
+## Segundo commit: edición de `index.jsp`
 
 Abre `src/main/webapp/index.jsp` desde VSCode (conectado por Remote SSH) y agrega esta línea:
 
@@ -211,7 +217,8 @@ git push
 
 Verifica los cambios en GitHub.
 
-## 📤 Subir los cambios al repositorio remoto
+📤  
+## Subir los cambios al repositorio remoto
 📦 Etapa 1: Staging
 En la terminal de VSCode, ejecuta:
 
@@ -240,23 +247,28 @@ Git puede pedirte nuevamente:
 • Tu usuario de GitHub
 • Tu token personal de acceso (PAT) como contraseña
 
-________________________________________
-## 💡 Tip de productividad: No escribir el token cada vez
+
+
+💡  
+## Tip de productividad: No escribir el token cada vez
 Ejecuta este comando después del push para que Git recuerde tus credenciales:
 
 git config --global credential.helper store
 
 Así no tendrás que pegar el token cada vez que haces push o pull.
-________________________________________
-## 🔍 Verifica tu cambio en GitHub
+
+
+🔍  
+## Verifica tu cambio en GitHub
 1.	Abre tu repositorio en GitHub.
 2.	Navega a src/main/webapp/index.jsp
 3.	Refresca la página.
 ✅ ¡Tu nueva línea HTML debería estar ahí!
 
 
-________________________________________
-## 📦 Crear y Configurar un Repositorio en AWS CodeArtifact
+
+📦  
+## Crear y Configurar un Repositorio en AWS CodeArtifact
 En este paso configuramos un repositorio privado para gestionar las dependencias de nuestro proyecto Java. Esto mejora la seguridad, consistencia y velocidad de los builds.
 ________________________________________
 🔐 ¿Qué es AWS CodeArtifact?
@@ -302,7 +314,8 @@ Haz clic en Create repository.
 Deberías ver un mensaje de éxito confirmando que nextwork-devops-cicd fue creado correctamente.
 
 
-## 🔐 Crear una política IAM para acceso a CodeArtifact
+🔐  
+## Crear una política IAM para acceso a CodeArtifact
 Para que Maven pueda trabajar con CodeArtifact, necesitamos crear un rol IAM que le dé permiso a nuestra instancia EC2 para acceder a CodeArtifact.
 De lo contrario, Maven puede intentar todo lo que quiera, pero la instancia EC2 no podrá almacenar ni recuperar paquetes desde CodeArtifact porque no tiene permisos.
 Recordemos que los roles IAM están compuestos por políticas, así que primero crearemos una política.
@@ -381,7 +394,8 @@ ________________________________________
 "Permisos CodeArtifact para NextWork"
 
 
-## 🔗 Adjuntar la política IAM y verificar la conexión a CodeArtifact
+🔗  
+## Adjuntar la política IAM y verificar la conexión a CodeArtifact
 Ahora que tienes la política creada, el siguiente paso es:
 • Crear un rol IAM para EC2 con esta política.
 • Asignar este rol a tu instancia EC2.
@@ -433,7 +447,8 @@ ________________________________________
 • Si nada funciona, prueba reiniciar la instancia EC2.
 
 
-## 📦 See Packages in CodeArtifact!
+📦  
+## See Packages in CodeArtifact!
 Ahora que hemos creado la IAM Role, la hemos asociado a nuestra instancia EC2 y hemos podido obtener el token de autorización para CodeArtifact, es hora de verificar que todo funcione correctamente.
 ¿Qué vamos a hacer?
 •	Terminar de configurar Maven para que use CodeArtifact.
@@ -506,7 +521,8 @@ Esto significa que ahora, otros desarrolladores o sistemas de CI/CD en tu organi
 
 
 
-## 🔧 Connect CodeBuild to your GitHub Repository (continuación)
+🔧  
+## Connect CodeBuild to your GitHub Repository (continuación)
 ________________________________________
 Próximos pasos para configurar CodeBuild con GitHub
 1.	Selecciona tu repositorio GitHub en CodeBuild
@@ -540,7 +556,9 @@ Recapitulando
 
 
 
-## ⚙️ Finish Setting Up Your CodeBuild Project
+⚙️  
+## Finish Setting Up Your CodeBuild Project
+
 ________________________________________
 1. Configure Build Environment
 •	Primary source webhook events:
@@ -611,7 +629,8 @@ ________________________________________
 
 
 
-## 🐞 Ejecutar la compilación y solucionar fallos
+🐞  
+## Ejecutar la compilación y solucionar fallos
 Ahora que nuestro proyecto de CodeBuild está completamente configurado, ¡iniciemos nuestra primera compilación y veamos nuestra pipeline de CI en acción!
 ________________________________________
 En este paso, vas a:
@@ -726,8 +745,8 @@ Ve a tu repositorio GitHub nextwork-web-project en el navegador y actualiza la p
 Revisa la salida en la terminal para confirmar que los cambios, incluyendo el nuevo archivo buildspec.yml, se han subido correctamente.
 
 
-
-## ✅ Verificar compilación exitosa y artefactos
+✅  
+## Verificar compilación exitosa y artefactos
 ¡Perfecto! Ahora que hemos corregido la configuración de CodeBuild, es momento de ejecutar nuevamente el proceso de compilación y verificar que nuestro bucket S3 esté almacenando correctamente el artefacto generado.
 ________________________________________
 ✅ En este paso vas a:
@@ -799,8 +818,8 @@ nextwork-web-project.war
 ¡Esto confirma que la compilación generó el archivo esperado! 🙌
 
 
-
-## 🚀 Despliegue de la Infraestructura de Producción con CloudFormation
+🚀  
+## Despliegue de la Infraestructura de Producción con CloudFormation
 En esta sección creamos una nueva instancia EC2 (ambiente de producción) utilizando AWS CloudFormation, implementando infraestructura como código (IaC).
 🧩 ¿Por qué una nueva instancia EC2?
 Ya habíamos creado una instancia EC2 para desarrollo. Ahora lanzamos una instancia separada para producción (entorno en vivo), evitando así probar cambios directamente frente a los usuarios.
@@ -991,7 +1010,8 @@ ________________________________________
 
 
 
-## 🧪 Prepare Deployment Scripts and AppSpec
+🧪  
+## Prepare Deployment Scripts and AppSpec
 
 Antes de poder desplegar nuestra aplicación, debemos preparar un conjunto de scripts y un archivo de configuración llamado `appspec.yml` para que AWS CodeDeploy sepa exactamente cómo realizar el despliegue.
 
@@ -1124,7 +1144,8 @@ e ingresa tu GitHub Personal Access Token cuando se te pida.
 ✅ ¡Listo! Ya tienes tus scripts y archivos preparados para que AWS CodeDeploy realice el despliegue de forma automática y organizada.
 
 
-## 🛠️ Set Up CodeDeploy
+🛠️  
+## Set Up CodeDeploy
 Now, let's get to know CodeDeploy and set it up to automate the deployment of our web app!
 ________________________________________
 📌 En este paso vas a:
@@ -1235,7 +1256,8 @@ Haz clic en Create deployment group.
 💪 ¡Excelente! Esta es la parte más detallada de CodeDeploy. Si llegaste hasta aquí, ya tienes una base sólida para manejar despliegues automatizados.
 
 
-## 🔍 Crear y Verificar el Despliegue
+🔍  
+## Crear y Verificar el Despliegue
 ¡Es momento de juntar todo y desplegar nuestra aplicación web en la instancia EC2!
 En este paso, vas a:
 ✅ Crear un despliegue en CodeDeploy
@@ -1312,7 +1334,9 @@ Has automatizado exitosamente el despliegue de una aplicación web en EC2 usando
 
 
 
-## 🧱 Configura tu Pipeline
+🧱  
+## Configura tu Pipeline
+
 ¡Vamos a comenzar con la creación de nuestro primer pipeline! Empezaremos configurando la estructura básica del pipeline y ajustando sus parámetros.
 ________________________________________
 En este paso vas a:
@@ -1361,7 +1385,8 @@ ________________________________________
 
 
 
-## 🧬 Configuración de las etapas de Source, Build y Deploy
+🧬  
+## Configuración de las etapas de Source, Build y Deploy
 ¿Listo para juntar todas las piezas de tu arquitectura CI/CD?
 ________________________________________
 En este paso vas a:
@@ -1395,7 +1420,8 @@ ________________________________________
 ¡Muy bien! Has configurado la etapa Source. Ahora vamos a la etapa Build.
 
 
-## 🏗️ Etapa Build (Construcción)
+🏗️  
+## Etapa Build (Construcción)
 La etapa Build es donde el código fuente se transforma en un artefacto listo para desplegar.
 Indicaremos a CodePipeline que use AWS CodeBuild para compilar y empaquetar nuestra aplicación web.
 ________________________________________
@@ -1425,7 +1451,8 @@ Es un mecanismo de seguridad que, si la etapa de Deploy falla, vuelve automátic
 
 
 
-## ▶️ ¡Ejecuta tu Pipeline!
+▶️  
+## ¡Ejecuta tu Pipeline!
 ¡Vamos a ver nuestro pipeline ejecutarse por primera vez! Esto nos ayudará a verificar que todo esté funcionando correctamente.
 ________________________________________
 En este paso vas a:
@@ -1452,7 +1479,8 @@ ________________________________________
 Espera a que la ejecución del pipeline termine. Puedes monitorear el estado de cada etapa en el diagrama.
 Para ver detalles específicos de una etapa, haz clic en el enlace del Stage ID en la pestaña Executions. Por ejemplo, haz clic en el Stage ID de la etapa Source para ver detalles sobre la obtención del código fuente.
 
-## 🧪 ¡Prueba tu Pipeline!
+🧪  
+## ¡Prueba tu Pipeline!
 Es hora de la prueba DEFINITIVA para este proyecto... ¡veamos cómo CodePipeline maneja un cambio en el código!
 Probar con un cambio en el código confirmará que nuestro pipeline se activa automáticamente y despliega nuestras actualizaciones.
 ________________________________________
