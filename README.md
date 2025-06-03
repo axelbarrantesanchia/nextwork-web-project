@@ -1487,7 +1487,9 @@ git push origin master
 <!-- -------------------------------------------------- -->
 🙋‍♀️ ¿Ves errores al hacer push?
 Intenta restablecer tus credenciales de Git y empieza de nuevo. Ejecuta estos comandos en tu terminal:
+
 <!-- -------------------------------------------------- -->
+
 ```bash
 git config --global --unset credential.helper
 ```
