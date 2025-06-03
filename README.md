@@ -1488,9 +1488,22 @@ git push origin master
 🙋‍♀️ ¿Ves errores al hacer push?
 Intenta restablecer tus credenciales de Git y empieza de nuevo. Ejecuta estos comandos en tu terminal:
 <!-- -------------------------------------------------- -->
+```bash
 git config --global --unset credential.helper
+```
+
+<!-- ---------------------------------------------- -->
+
+```bash
 git config --local --unset credential.helper
+```
+
+<!-- ---------------------------------------------- -->
+
+```bash
 git remote set-url origin https://<TU_USUARIO_GITHUB>@github.com/<TU_USUARIO_GITHUB>/<TU_REPOSITORIO>.git
+```
+<!-- ---------------------------------------------- -->
 Asegúrate de reemplazar <TU_USUARIO_GITHUB> con tu nombre de usuario de GitHub y <TU_REPOSITORIO> con el nombre de tu repositorio.
   <!-- -------------------------------------------------- -->
 Después intenta hacer push de nuevo e ingresa tu PAT de GitHub cuando te pida la contraseña. Si no te lo pide en la terminal, revisa la parte superior de la ventana de VS Code.
