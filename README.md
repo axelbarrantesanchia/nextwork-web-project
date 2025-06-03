@@ -25,7 +25,7 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 
 ## 📚 Índice de Contenidos
 
-1. [🖥️ Configuración de la instancia EC2](#🖥️-configuración-de-la-instancia-ec2)  
+1. [Configuración de la instancia EC2](#configuración-de-la-instancia-ec2) 
 2. [🧰 Instalación de Git en EC2](#🧰-instalación-de-git-en-ec2)  
 3. [🐙 Crear repositorio en GitHub](#🐙-crear-repositorio-en-github)  
 4. [📁 Inicializar repositorio Git en EC2](#📁-inicializar-repositorio-git-en-ec2)  
@@ -64,7 +64,7 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 
 ---
 
-## 🖥️ Configuración de la instancia EC2
+## Configuración de la instancia EC2
 
 Desde la consola de AWS:
 
