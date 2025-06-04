@@ -88,71 +88,109 @@ ________________________________________
 🧰 Pasos para crear un usuario IAM
 <!-- -------------------------------------------------- -->
 1.	Abre la Consola de IAM.
+<!-- -------------------------------------------------- -->
 2.	En el menú lateral izquierdo, haz clic en Users.
+<!-- -------------------------------------------------- -->
 3.	Haz clic en Create user.
+<!-- -------------------------------------------------- -->
 4.	En User name, escribe algo como:
+   <!-- -------------------------------------------------- -->
 TuNombre-IAM-Admin
+<!-- -------------------------------------------------- -->
 (Reemplaza “TuNombre” por tu nombre real, por ejemplo Axel-IAM-Admin).
+<!-- -------------------------------------------------- -->
 5.	Marca la casilla Provide user access to the AWS Management Console.
+<!-- -------------------------------------------------- -->
 6.	Elige la opción Custom password, e ingresa una contraseña segura que puedas recordar.
 🔒 Desactiva la casilla “Users must create a new password at next sign-in”.
+<!-- -------------------------------------------------- -->
 7.	Haz clic en Next.
 ________________________________________
 🛡️ Asignar permisos al usuario IAM
+<!-- -------------------------------------------------- -->
 8.	En la sección Set permissions, selecciona:
 Attach policies directly.
+<!-- -------------------------------------------------- -->
 9.	Busca y marca la política:
 AdministratorAccess
+<!-- -------------------------------------------------- -->
 10.	Haz clic en Next y luego en Create user.
 ________________________________________
 💾 Guardar credenciales
+<!-- -------------------------------------------------- -->
 11.	En la página de confirmación, haz clic en Download .csv file
 (Este archivo contiene tu nombre de usuario, contraseña y URL de inicio de sesión personalizada.)
+<!-- -------------------------------------------------- -->
 12.	Copia el Console sign-in URL que aparece ahí.
 ________________________________________
 🔄 Usar el nuevo usuario IAM
+<!-- -------------------------------------------------- -->
 13.	Cierra sesión del usuario root.
+<!-- -------------------------------------------------- -->
 14.	Abre el enlace de inicio de sesión (Console sign-in URL) que copiaste.
+<!-- -------------------------------------------------- -->
 15.	Usa las credenciales del archivo .csv para iniciar sesión con tu nuevo usuario IAM.
+<!-- -------------------------------------------------- -->
 16.	✅ ¡Listo! Ya estás usando tu usuario IAM con permisos de administrador, ideal para continuar con tus proyectos en AWS.
-
+<!-- -------------------------------------------------- -->
 🧠 Instalación de Visual Studio Code (VS Code)
 Ahora que tu instancia EC2 está en funcionamiento, usaremos Visual Studio Code (VS Code) para conectarnos a ella y configurar tu aplicación web.
 ________________________________________
 🎨 ¿Qué es VS Code?
+<!-- -------------------------------------------------- -->
 VS Code es uno de los editores de código más populares del mundo. Se le considera un IDE (Entorno de Desarrollo Integrado) que ayuda a escribir, depurar y administrar proyectos de código.
 También se puede usar para conectarse a servidores remotos, como nuestras instancias EC2 en AWS.
+<!-- -------------------------------------------------- -->
 ________________________________________
 💻 Pasos para instalar VS Code
+<!-- -------------------------------------------------- -->
 1.	Dirígete al sitio oficial de VS Code:
 👉 https://code.visualstudio.com/
+<!-- -------------------------------------------------- -->
 2.	Descarga la versión correspondiente a tu sistema operativo (Windows, macOS, Linux).
+<!-- -------------------------------------------------- -->
 💡 Si no sabes qué versión necesitas:
+<!-- -------------------------------------------------- -->
 o	Mac: Ve al menú  → About This Mac → revisa si tu chip es Apple Silicon o Intel.
+<!-- -------------------------------------------------- -->
 o	Windows: Pulsa el botón Inicio → escribe System Information → revisa si tu tipo de sistema es x64 o ARM.
+<!-- -------------------------------------------------- -->
 o	Linux: Abre la terminal y ejecuta:
+<!-- -------------------------------------------------- -->
 ```bash
 uname -m
 ```
+<!-- -------------------------------------------------- -->
 Si ves x86_64, estás en una máquina de 64 bits. Si ves arm64 o aarch64, tienes una arquitectura ARM.
+<!-- -------------------------------------------------- -->
 3.	Instala VS Code según las instrucciones del instalador.
+<!-- -------------------------------------------------- -->
 4.	Abre VS Code desde tu computadora local. Si descargaste un .zip, descomprímelo primero.
 ________________________________________
 🖥️ Configuración del terminal en VS Code
+<!-- -------------------------------------------------- -->
 1.	Abre VS Code.
+<!-- -------------------------------------------------- -->
 2.	Haz clic en la opción Terminal desde la barra superior.
+<!-- -------------------------------------------------- -->
 3.	Selecciona New Terminal.
+<!-- -------------------------------------------------- -->
 💡 ¿Qué es un terminal?
+<!-- -------------------------------------------------- -->
 Es un lugar donde puedes escribir instrucciones para que tu sistema operativo las ejecute directamente.
+<!-- -------------------------------------------------- -->
 4.	Navega a la carpeta donde guardaste tu archivo .pem (por ejemplo: DevOps en el escritorio):
 o	En Linux/macOS:
+<!-- -------------------------------------------------- -->
 ```bash
 cd ~/Desktop/DevOps
 ```
+<!-- -------------------------------------------------- -->
 o	En Windows (Opción 1):
 ```cmd
 cd %USERPROFILE%\Desktop\DevOps
 ```
+<!-- -------------------------------------------------- -->
 o	En Windows (Opción 2):
 ```cmd
 cd C:\Users\YourUserName\Desktop\DevOps
@@ -161,17 +199,20 @@ Reemplaza YourUserName con tu nombre de usuario real, el cual puedes consultar c
 ```cmd
 Whoami
 ```
+<!-- -------------------------------------------------- -->
 5.	Lista los archivos para confirmar que tu archivo .pem está ahí:
 o	En Linux/macOS:
 ```bash
 ls
 ```
+<!-- -------------------------------------------------- -->
 o	En Windows:
 ```cmd
 dir
 ```
 ________________________________________
 🔐 Cambiar permisos del archivo .pem
+<!-- -------------------------------------------------- -->
 Dependiendo del sistema operativo, utiliza los siguientes comandos para asegurar el archivo de clave privada (.pem):
 ________________________________________
 🔒 Linux/macOS
@@ -193,28 +234,42 @@ whoami
 ________________________________________
 🧩 ¿Errores comunes?
 Si algo no funciona como esperas, aquí van algunas verificaciones:
+<!-- -------------------------------------------------- -->
 •	¿Tu archivo .pem tiene el nombre correcto en el comando?
+<!-- -------------------------------------------------- -->
 •	¿Estás en la carpeta correcta al ejecutar el comando?
+<!-- -------------------------------------------------- -->
 •	¿La regla del grupo de seguridad de tu instancia EC2 permite tráfico SSH (puerto 22) desde tu IP?
+<!-- -------------------------------------------------- -->
 •	Verifica tu IP actual con una herramienta externa y compárala con la que agregaste en AWS.
+<!-- -------------------------------------------------- -->
 
 
 🔌 Conexión a tu instancia EC2 desde VS Code (SSH)
+<!-- -------------------------------------------------- -->
 Ahora que tienes VS Code instalado y el archivo .pem configurado, es momento de conectarte a tu servidor EC2 usando SSH desde el terminal de VS Code.
 ________________________________________
 🛰️ Obtener la dirección pública de tu EC2
+<!-- -------------------------------------------------- -->
 1.	Abre la Consola de Administración de AWS.
+<!-- -------------------------------------------------- -->
 2.	Haz clic en Instances en el menú lateral izquierdo.
+<!-- -------------------------------------------------- -->
 3.	Marca la casilla junto a tu instancia EC2 para ver sus detalles.
+<!-- -------------------------------------------------- -->
 4.	En la pestaña Details, busca el campo llamado:
 Public IPv4 DNS
+<!-- -------------------------------------------------- -->
 ✨ ¡Deja esta pestaña abierta! Lo necesitarás en el siguiente paso.
 ________________________________________
 💡 ¿Qué es un Public IPv4 DNS?
+<!-- -------------------------------------------------- -->
 Es una dirección única en Internet que apunta a tu instancia EC2, como si fuera su "nombre público". Tu computadora usará esta dirección para conectarse al servidor remoto EC2.
 ________________________________________
 🧑‍💻 Conectarse a tu instancia EC2 vía SSH desde VS Code
+<!-- -------------------------------------------------- -->
 1.	Regresa a Visual Studio Code y abre de nuevo la terminal.
+<!-- -------------------------------------------------- -->
 2.	Ejecuta el siguiente comando en la terminal, personalizándolo con tu información:
 ```bash
 ssh -i [RUTA/A/TU/ARCHIVO.pem] ec2-user@[PUBLIC-DNS]
@@ -231,41 +286,69 @@ ec2-user@ec2-3-22-123-456.compute-1.amazonaws.com
 ```
 ________________________________________
 🧠 ¿Qué hace este comando?
+<!-- -------------------------------------------------- -->
 Parte del comando	Significado
+<!-- -------------------------------------------------- -->
 ssh	Inicia una conexión segura a través del protocolo SSH
+<!-- -------------------------------------------------- -->
 -i	Especifica el archivo de clave privada (.pem) que autentica la conexión
+<!-- -------------------------------------------------- -->
 ec2-user@...	Define el usuario y la dirección DNS pública de la instancia EC2
+<!-- -------------------------------------------------- -->
 ________________________________________
 🛠️ Problemas comunes y errores al conectarte
+<!-- -------------------------------------------------- -->
 🙋‍♀️ ¿Te aparece un error? ¡No te preocupes! Algunos errores comunes incluyen:
+<!-- -------------------------------------------------- -->
 •	❌ "Permission denied"
+<!-- -------------------------------------------------- -->
 •	❌ "Cannot find path"
+<!-- -------------------------------------------------- -->
 •	❌ "Connection timed out"
+<!-- -------------------------------------------------- -->
 •	❌ "Could not establish connection"
+<!-- -------------------------------------------------- -->
 •	🌀 SSH se queda cargando por más de 10 minutos
+<!-- -------------------------------------------------- -->
 Verifica lo siguiente:
+<!-- -------------------------------------------------- -->
 •	Asegúrate de no tener espacios en los nombres de tus carpetas.
+<!-- -------------------------------------------------- -->
 Ejemplo: ❌ Dev Ops → ✅ DevOps
+<!-- -------------------------------------------------- -->
 •	Confirma que el nombre y la ubicación del archivo .pem son correctos.
+<!-- -------------------------------------------------- -->
 •	Verifica que tu grupo de seguridad EC2 permita tráfico SSH (puerto 22) desde tu dirección IP.
+<!-- -------------------------------------------------- -->
 •	Usa whoami para asegurarte de estar usando tu nombre de usuario correcto en rutas personalizadas.
+<!-- -------------------------------------------------- -->
 •	Asegúrate de que cambiaste los permisos del .pem (ver sección anterior).
+<!-- -------------------------------------------------- -->
 ________________________________________
 🔐 Confirmación del servidor
+<!-- -------------------------------------------------- -->
 Cuando conectes por primera vez, tu terminal preguntará si deseas continuar con la conexión:
 ```bash
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
+<!-- -------------------------------------------------- -->
 👉 Escribe yes y presiona Enter.
+<!-- -------------------------------------------------- -->
 ________________________________________
 💡 ¿Qué es la huella digital del servidor (fingerprint)?
+<!-- -------------------------------------------------- -->
 Es un código único que ayuda a verificar que el servidor es seguro y no ha sido alterado. Como es la primera vez que te conectas, tu equipo aún no ha guardado esa huella, así que debes confirmarla manualmente.
+<!-- -------------------------------------------------- -->
 ________________________________________
 🚨 IMPORTANTE
+<!-- -------------------------------------------------- -->
 Si no cambiaste los permisos de tu archivo .pem a chmod 400, la conexión será rechazada automáticamente por motivos de seguridad.
+<!-- -------------------------------------------------- -->
 ________________________________________
 ✅ ¡Felicidades! Si todo ha salido bien, ahora estás conectado a tu instancia EC2.
+<!-- -------------------------------------------------- -->
 🧪 ¿Cómo saber si te conectaste correctamente?
+<!-- -------------------------------------------------- -->
 Tu terminal debería cambiar y mostrar algo similar a:
 ```bash
 ec2-user@ip-172-31-XX-XXX:~$
@@ -275,16 +358,25 @@ ec2-user@ip-172-31-XX-XXX:~$
 ⚙️ 
 ## Instalar Apache Maven y Amazon Corretto 8 en tu instancia EC2
 ✅ ¡Conexión completada!
+<!-- -------------------------------------------------- -->
 Tu terminal ahora controla tu instancia EC2 como si fuera una computadora frente a ti.
+<!-- -------------------------------------------------- -->
 En esta etapa, vas a instalar dos herramientas clave para construir aplicaciones web en Java:
+<!-- -------------------------------------------------- -->
 •	Apache Maven
+<!-- -------------------------------------------------- -->
 •	Amazon Corretto 8 (versión de Java)
+<!-- -------------------------------------------------- -->
 ________________________________________
 📦 ¿Qué es Apache Maven?
+<!-- -------------------------------------------------- -->
 Apache Maven es una herramienta para compilar y gestionar proyectos Java. También actúa como un gestor de dependencias, descargando automáticamente bibliotecas externas necesarias.
+<!-- -------------------------------------------------- -->
 Además, Maven facilita el inicio de proyectos web gracias a sus arquetipos (plantillas predefinidas). ¡Te ahorra mucho tiempo!
+<!-- -------------------------------------------------- -->
 ________________________________________
 🔧 Instalar Apache Maven en tu instancia EC2
+<!-- -------------------------------------------------- -->
 📥 Ejecuta todos estos comandos juntos en la terminal (puedes copiarlos y pegarlos directamente):
 ```bash
 wget https://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
@@ -294,21 +386,30 @@ source ~/.bashrc
 ```
 ________________________________________
 🙋‍♀️ ¿Error wget: command not found?
+<!-- -------------------------------------------------- -->
 Esto significa que wget no está instalado por defecto. Soluciónalo así:
 ```bash
 sudo yum install wget -y
 ```
+<!-- -------------------------------------------------- -->
 Luego, vuelve a ejecutar los comandos de instalación de Maven.
 ________________________________________
 💡 ¿Qué hacen esos comandos?
+<!-- -------------------------------------------------- -->
 Comando	Descripción
+<!-- -------------------------------------------------- -->
 wget ...	Descarga el archivo comprimido de Maven
+<!-- -------------------------------------------------- -->
 tar -xzf ...	Extrae el archivo en el directorio /opt
+<!-- -------------------------------------------------- -->
 echo "export PATH=..."	Añade Maven al PATH para poder usarlo desde cualquier ubicación
+<!-- -------------------------------------------------- -->
 source ~/.bashrc	Aplica los cambios al entorno de la terminal
+<!-- -------------------------------------------------- -->
 ________________________________________
 ☕ Instalar Amazon Corretto 8 (Java 8)
 Maven requiere Java para funcionar, así que ahora instalarás Amazon Corretto 8, una distribución gratuita y confiable de Java mantenida por AWS.
+<!-- -------------------------------------------------- -->
 Ejecuta estos comandos en tu terminal EC2:
 ```bash
 sudo dnf install -y java-1.8.0-amazon-corretto-devel
@@ -317,21 +418,32 @@ export PATH=/usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64/jre/bin/:$PATH
 ```
 ________________________________________
 💡 ¿Qué hacen estos comandos?
+<!-- -------------------------------------------------- -->
 Comando	Descripción
+<!-- -------------------------------------------------- -->
 sudo dnf install ...	Instala Amazon Corretto 8
+<!-- -------------------------------------------------- -->
 export JAVA_HOME=...	Define la variable de entorno para indicar dónde está instalado Java
+<!-- -------------------------------------------------- -->
 export PATH=...	Permite ejecutar comandos Java desde cualquier carpeta
+<!-- -------------------------------------------------- -->
 ________________________________________
 ✅ Verificar las instalaciones
+<!-- -------------------------------------------------- -->
 1.	Verifica Maven:
 ```bash
 mvn -v
 ```
 ✅ Si ves una versión como Apache Maven 3.5.2, ¡todo está correcto!
+<!-- -------------------------------------------------- -->
 🙋‍♀️ ¿No ves un número de versión?
+<!-- -------------------------------------------------- -->
 •	Ejecuta también mvn -v en tu terminal local para comparar.
+<!-- -------------------------------------------------- -->
 •	Si solo hay problema en EC2, revisa tu PATH o vuelve a instalar Maven.
+<!-- -------------------------------------------------- -->
 •	Si tienes problemas en local, revisa tu JDK.
+<!-- -------------------------------------------------- -->
 ________________________________________
 2.	Verifica Java:
 ```bash
@@ -348,15 +460,21 @@ sudo alternatives --config java
 ```
 ________________________________________
 🧠 Notas importantes
+<!-- -------------------------------------------------- -->
 •	El texto que aparece tras ejecutar los comandos indica el progreso de la instalación.
+<!-- -------------------------------------------------- -->
 •	Si encuentras errores durante la instalación de Maven o Java, compártelos con la comunidad NextWork.
+<!-- -------------------------------------------------- -->
 
 
 🚀 Crear la Aplicación Web con Maven
+<!-- -------------------------------------------------- -->
 Ahora que tienes Maven y Java instalados en tu instancia EC2, ¡es momento de generar tu aplicación web Java!
+<!-- -------------------------------------------------- -->
 Vamos a usar Maven para crear un proyecto base usando un arquetipo (plantilla).
 ________________________________________
 🛠️ Generar una aplicación web Java
+<!-- -------------------------------------------------- -->
 Ejecuta el siguiente comando en tu terminal EC2 para generar el proyecto:
 ```bash
 mvn archetype:generate \
@@ -367,15 +485,24 @@ mvn archetype:generate \
 ```
 ________________________________________
 💡 ¿Qué hace este comando?
+<!-- -------------------------------------------------- -->
 Este comando le dice a Maven que:
+<!-- -------------------------------------------------- -->
 Parámetro	Significado
+<!-- -------------------------------------------------- -->
 mvn archetype:generate	Inicia la generación de un nuevo proyecto desde un arquetipo (plantilla)
+<!-- -------------------------------------------------- -->
 -DgroupId=com.nextwork.app	Define el grupo del proyecto, normalmente basado en el dominio de tu organización
+<!-- -------------------------------------------------- -->
 -DartifactId=nextwork-web-project	Nombra tu proyecto; será también el nombre del directorio generado
+<!-- -------------------------------------------------- -->
 -DarchetypeArtifactId=maven-archetype-webapp	Indica que deseas crear una aplicación web Java básica
+<!-- -------------------------------------------------- -->
 -DinteractiveMode=false	Ejecuta sin pedir confirmación o datos adicionales
+<!-- -------------------------------------------------- -->
 ________________________________________
 ✅ Resultado esperado
+<!-- -------------------------------------------------- -->
 Después de ejecutar el comando, deberías ver un mensaje como:
 ```csharp
 [INFO] BUILD SUCCESS
@@ -383,6 +510,7 @@ Después de ejecutar el comando, deberías ver un mensaje como:
 Esto indica que Maven ha creado con éxito la estructura base de tu aplicación web.
 ________________________________________
 📁 Nuevo directorio creado:
+<!-- -------------------------------------------------- -->
 Al finalizar, deberías ver un nuevo directorio llamado nextwork-web-project, que contiene la estructura inicial de tu app web en Java.
 
 
@@ -392,28 +520,43 @@ Al finalizar, deberías ver un nuevo directorio llamado nextwork-web-project, qu
 Ahora que creaste la estructura de tu aplicación web, es momento de conectarte desde Visual Studio Code (VS Code) a tu instancia EC2 para visualizar, editar y trabajar fácilmente con los archivos de tu aplicación Java.
 ________________________________________
 🧭 ¿Por qué conectar VS Code?
+<!-- -------------------------------------------------- -->
 Aunque ya tienes conexión SSH desde la terminal, conectarte directamente desde VS Code te permitirá:
+<!-- -------------------------------------------------- -->
 •	Navegar por archivos como si estuvieran en tu computadora local
+<!-- -------------------------------------------------- -->
 •	Editar archivos fácilmente con todas las ventajas del IDE
+<!-- -------------------------------------------------- -->
 •	Ahorrar tiempo en tareas de desarrollo gracias a la integración con herramientas como Git, extensiones y resaltado de sintaxis
 ________________________________________
 🧩 Paso 1: Instalar la extensión Remote - SSH
+<!-- -------------------------------------------------- -->
 1.	Abre VS Code
+<!-- -------------------------------------------------- -->
 2.	Haz clic en el ícono de Extensiones
+<!-- -------------------------------------------------- -->
 3.	Busca Remote - SSH
+<!-- -------------------------------------------------- -->
 4.	Haz clic en Instalar
 ________________________________________
 🚀 Paso 2: Conectarte a la instancia EC2 desde VS Code
+<!-- -------------------------------------------------- -->
 1.	Haz clic en el ícono de doble flecha (Remote Explorer) en la esquina inferior izquierda
+<!-- -------------------------------------------------- -->
 2.	Selecciona Connect to Host...
+<!-- -------------------------------------------------- -->
 3.	Luego selecciona + Add New SSH Host...
+<!-- -------------------------------------------------- -->
 4.	Ingresa el siguiente comando, reemplazando los valores:
 ```bash
 ssh -i ~/Desktop/DevOps/nextwork-keypair.pem ec2-user@<YOUR_PUBLIC_IPV4_DNS>
 ```
 •	Reemplaza ~/Desktop/DevOps/nextwork-keypair.pem por la ruta de tu archivo .pem
+<!-- -------------------------------------------------- -->
 •	Reemplaza <YOUR_PUBLIC_IPV4_DNS> por el DNS público de tu instancia EC2 (sin los <>)
+<!-- -------------------------------------------------- -->
 5.	Selecciona el archivo de configuración SSH sugerido (ej. /Users/tu-usuario/.ssh/config)
+<!-- -------------------------------------------------- -->
 6.	Haz clic en Open Config para verificar:
 ```ssh
 Host ec2-nextwork
@@ -422,26 +565,38 @@ Host ec2-nextwork
   IdentityFile ~/Desktop/DevOps/nextwork-keypair.pem
 ```
 7.	Guarda los cambios
+<!-- -------------------------------------------------- -->
 8.	Haz clic nuevamente en el ícono de doble flecha y elige Connect to Host → Selecciona tu instancia EC2
+9.	<!-- -------------------------------------------------- -->
 📍 Verifica en la esquina inferior derecha de VS Code: deberías ver el DNS público de tu EC2 si todo salió bien.
 ________________________________________
 📁 Paso 3: Abrir el proyecto Java
+<!-- -------------------------------------------------- -->
 1.	Haz clic en el ícono de Explorador de Archivos (Explorer)
+<!-- -------------------------------------------------- -->
 2.	Selecciona Open Folder
+<!-- -------------------------------------------------- -->
 3.	Ingresa la ruta:
 ```bash
 /home/ec2-user/nextwork-web-project
 ```
+<!-- -------------------------------------------------- -->
 4.	Si aparece un popup preguntando si confías en los autores, selecciona Yes, I trust the authors
 ________________________________________
 🧪 Explorar archivos del proyecto
+<!-- -------------------------------------------------- -->
 •	src/: contiene todo el código fuente
+<!-- -------------------------------------------------- -->
 o	webapp/: incluye archivos HTML, CSS, JS, y JSP
+<!-- -------------------------------------------------- -->
 o	resources/: archivos de configuración
+<!-- -------------------------------------------------- -->
 •	pom.xml: archivo clave para Maven, contiene la configuración del proyecto
 ________________________________________
 ✏️ Paso 4: Editar el archivo index.jsp
+<!-- -------------------------------------------------- -->
 1.	Navega hasta src/main/webapp/index.jsp
+<!-- -------------------------------------------------- -->
 2.	Reemplaza el contenido con el siguiente código, cambiando {YOUR NAME} por tu nombre:
 ```Html
 <html>
@@ -451,15 +606,21 @@ ________________________________________
   </body>
 </html>
 ```
+<!-- -------------------------------------------------- -->
 3.	Guarda los cambios con Ctrl + S o Cmd + S
 ________________________________________
 🎉 ¡Listo!
+<!-- -------------------------------------------------- -->
 Has logrado:
+<!-- -------------------------------------------------- -->
 •	Crear una app web en una instancia EC2
+<!-- -------------------------------------------------- -->
 •	Conectarte a ella desde VS Code
+<!-- -------------------------------------------------- -->
 •	Explorar y modificar archivos directamente desde el IDE
+<!-- -------------------------------------------------- -->
 ¡Todo está preparado para seguir construyendo sobre esta base durante el resto de la serie DevOps!
-
+<!-- -------------------------------------------------- -->
 
 
 🖥️
