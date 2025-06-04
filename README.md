@@ -149,13 +149,13 @@ ________________________________________
 16.	✅ ¡Listo! Ya estás usando tu usuario IAM con permisos de administrador, ideal para continuar con tus proyectos en AWS.
 <!-- -------------------------------------------------- -->
 
-🖥️
+🖥️  
 ## Configuración de la instancia EC2
 
 Desde la consola de AWS:
 
 * **Nombre de la instancia:**
-  `nextwork-devops-axel`
+  `nextwork-devops-axel`  
   *(Reemplaza “axel” con tu nombre si estás replicando este tutorial).*
 
 * **AMI:**
@@ -166,13 +166,18 @@ Desde la consola de AWS:
 
 * **Par de llaves (Key Pair):**
 
-  * Si no tienes una:
+  * Si no tienes una:  
     → Crea una llamada `nextwork-keypair` y descarga el `.pem`
-  * Si ya tienes una:
+  * Si ya tienes una:  
     → Usa `nextwork-keypair.pem` existente.
 
-* **Ruta recomendada del archivo PEM local:**
+* **Ruta recomendada del archivo PEM local:**  
   `Escritorio/DevOps/nextwork-keypair.pem`
+
+* **Regla de seguridad (Security Group):**  
+  Asegúrate de habilitar el puerto **SSH (22)** para poder conectarte a la instancia desde tu máquina local.
+
+  ✅ **Una vez que hayas configurado todos los campos anteriores, haz clic en** `Launch Instance` **para crear tu instancia EC2.**
 
   
 🧠 Instalación de Visual Studio Code (VS Code)
