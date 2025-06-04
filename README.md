@@ -41,9 +41,9 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 ## 📚 Índice de Contenidos
 
 1. 🔐 [Configuración de un Usuario IAM](#configuración-de-un-usuario-iam)
-2. ⚙️ [Instalar Apache Maven y Amazon Corretto 8 en tu instancia EC2](#instalar-apache-maven-y-amazon-corretto-8-en-tu-instancia-ec2)
-3. 🔗 [Conectar VS Code con tu Instancia EC2](#conectar-vs-code-con-tu-instancia-ec2)
-4. 🖥️ [Configuración de la instancia EC2](#configuración-de-la-instancia-ec2)
+2. 🖥️ [Configuración de la instancia EC2](#configuración-de-la-instancia-ec2)
+3. ⚙️ [Instalar Apache Maven y Amazon Corretto 8 en tu instancia EC2](#instalar-apache-maven-y-amazon-corretto-8-en-tu-instancia-ec2)
+4. 🔗 [Conectar VS Code con tu Instancia EC2](#conectar-vs-code-con-tu-instancia-ec2)
 5. 🧰 [Instalación de Git en EC2](#instalación-de-git-en-ec2)
 6. 🐙 [Crear repositorio en GitHub](#crear-repositorio-en-github)
 7. 📁 [Inicializar repositorio Git en EC2](#inicializar-repositorio-git-en-ec2)
@@ -148,6 +148,33 @@ ________________________________________
 <!-- -------------------------------------------------- -->
 16.	✅ ¡Listo! Ya estás usando tu usuario IAM con permisos de administrador, ideal para continuar con tus proyectos en AWS.
 <!-- -------------------------------------------------- -->
+
+🖥️
+## Configuración de la instancia EC2
+
+Desde la consola de AWS:
+
+* **Nombre de la instancia:**
+  `nextwork-devops-axel`
+  *(Reemplaza “axel” con tu nombre si estás replicando este tutorial).*
+
+* **AMI:**
+  Amazon Linux 2023 AMI
+
+* **Tipo de instancia:**
+  t2.micro (gratis en capa free tier)
+
+* **Par de llaves (Key Pair):**
+
+  * Si no tienes una:
+    → Crea una llamada `nextwork-keypair` y descarga el `.pem`
+  * Si ya tienes una:
+    → Usa `nextwork-keypair.pem` existente.
+
+* **Ruta recomendada del archivo PEM local:**
+  `Escritorio/DevOps/nextwork-keypair.pem`
+
+  
 🧠 Instalación de Visual Studio Code (VS Code)
 Ahora que tu instancia EC2 está en funcionamiento, usaremos Visual Studio Code (VS Code) para conectarnos a ella y configurar tu aplicación web.
 ________________________________________
@@ -637,31 +664,6 @@ Has logrado:
 ¡Todo está preparado para seguir construyendo sobre esta base durante el resto de la serie DevOps!
 <!-- -------------------------------------------------- -->
 
-
-🖥️
-## Configuración de la instancia EC2
-
-Desde la consola de AWS:
-
-* **Nombre de la instancia:**
-  `nextwork-devops-axel`
-  *(Reemplaza “axel” con tu nombre si estás replicando este tutorial).*
-
-* **AMI:**
-  Amazon Linux 2023 AMI
-
-* **Tipo de instancia:**
-  t2.micro (gratis en capa free tier)
-
-* **Par de llaves (Key Pair):**
-
-  * Si no tienes una:
-    → Crea una llamada `nextwork-keypair` y descarga el `.pem`
-  * Si ya tienes una:
-    → Usa `nextwork-keypair.pem` existente.
-
-* **Ruta recomendada del archivo PEM local:**
-  `Escritorio/DevOps/nextwork-keypair.pem`
 
 ---
 
