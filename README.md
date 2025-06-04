@@ -5,22 +5,37 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 ---
 
 ⚙️ Stack Tecnológico
+<!-- -------------------------------------------------- -->
 💻 Infraestructura y Lenguajes
+<!-- -------------------------------------------------- -->
 •	🖥️ Instancia EC2 (Amazon Linux 2023)
+<!-- -------------------------------------------------- -->
 •	☕ Java 8 (Amazon Corretto 8)
+<!-- -------------------------------------------------- -->
 •	🔨 Apache Maven 
+<!-- -------------------------------------------------- -->
 •	📂 Git y GitHub
+<!-- -------------------------------------------------- -->
 •	🖋️ Visual Studio Code con extensión Remote - SSH
+<!-- -------------------------------------------------- -->
 •	🌐 Aplicación web generada con maven-archetype-webapp (estructura estándar de proyecto web Java con Maven)
+<!-- -------------------------------------------------- -->
 ☁️ Servicios de AWS Utilizados
+<!-- -------------------------------------------------- -->
 •	⚙️ Amazon EC2 – Servidor para desplegar y ejecutar la aplicación.
+<!-- -------------------------------------------------- -->
 •	📦 AWS CodePipeline – Automatiza todo el flujo CI/CD.
+<!-- -------------------------------------------------- -->
 •	🔧 AWS CodeBuild – Compila el código y genera artefactos.
+<!-- -------------------------------------------------- -->
 •	🚀 AWS CodeDeploy – Despliega automáticamente los cambios a la instancia EC2.
+<!-- -------------------------------------------------- -->
 •	🗃️ Amazon S3 (Artifact Store) – Almacena artefactos generados entre etapas del pipeline.
+<!-- -------------------------------------------------- -->
 •	🔐 IAM (Roles y permisos) – Permite que los servicios interactúen entre sí de forma segura.
+<!-- -------------------------------------------------- -->
 •	🔁 Webhooks de GitHub – Activan automáticamente el pipeline tras cada push.
-
+<!-- -------------------------------------------------- -->
 
 
 ## 📚 Índice de Contenidos
