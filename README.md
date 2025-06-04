@@ -96,9 +96,11 @@ Desde la consola de AWS:
 Abre la terminal en tu instancia EC2 y ejecuta:
 
 
+```bash
 sudo dnf update -y
 sudo dnf install git -y
 git --version
+```
 
 
 ✅ Esto actualiza el sistema e instala Git correctamente.
@@ -139,10 +141,12 @@ git remote add origin https://github.com/tuusuario/nextwork-web-project.git
 ## Agregar, commitear y subir los cambios
 
 
+```bash
 git add .
 git diff --staged
 git commit -m "Updated index.jsp with new content"
 git push -u origin master
+```
 
 
 ---
@@ -167,9 +171,11 @@ Al hacer `git push`, ingresa:
 ## Configurar identidad de Git
 
 
-git config --global user.name "Axel Andres Barrantes Anchia"
-git config --global user.email axelbarrantesanchia@gmail.com
+```bash
+git config --global user.name "Nombre"
+git config --global user.email ejemplo@gmail.com
 git config --global --list
+```
 
 
 ---
@@ -188,7 +194,9 @@ Visita tu repositorio y deberías ver:
 📜  
 ## Historial de commits
 
+```bash
 git log
+```
 
 Muestra:
 
@@ -204,15 +212,19 @@ Muestra:
 
 Abre `src/main/webapp/index.jsp` desde VSCode (conectado por Remote SSH) y agrega esta línea:
 <!-- -------------------------------------------------- -->
+```html
 <p>If you see this line in Github, that means your latest changes are getting pushed to your cloud repo :o</p>
+```
 <!-- -------------------------------------------------- -->
 <!-- -------------------------------------------------- -->
 Guarda, y ejecuta:
 <!-- -------------------------------------------------- -->
 <!-- -------------------------------------------------- -->
+```bash
 git add .
 git commit -m "Add new line to index.jsp"
 git push
+```
 <!-- -------------------------------------------------- -->
 <!-- -------------------------------------------------- -->
 Verifica los cambios en GitHub.
@@ -222,26 +234,34 @@ Verifica los cambios en GitHub.
 📦 Etapa 1: Staging
 En la terminal de VSCode, ejecuta:
 <!-- -------------------------------------------------- -->
+```bash
 git add .
+```
 <!-- -------------------------------------------------- -->
 Esto prepara todos los archivos modificados para ser incluidos en el próximo commit.
 <!-- -------------------------------------------------- -->
 🔍 Etapa 2: Verifica los cambios que vas a guardar'
 <!-- -------------------------------------------------- -->
+```bash
 git diff --staged
+```
 <!-- -------------------------------------------------- -->
 Esto te muestra una comparación entre la última versión confirmada (commit anterior) y los cambios que están listos para confirmar.
 💡 Si se queda “pegado”, presiona q para salir de la vista y volver a la terminal.
 <!-- -------------------------------------------------- -->
 📝 Etapa 3: Hacer commit
 <!-- -------------------------------------------------- -->
+```bash
 git commit -m "Add new line to index.jsp"
+```
 <!-- -------------------------------------------------- -->
 Esto crea un nuevo commit con un mensaje descriptivo.
 <!-- -------------------------------------------------- -->
 🚀 Etapa 4: Hacer push
 <!-- -------------------------------------------------- -->
+```bash
 git push
+```
 <!-- -------------------------------------------------- -->
 Git puede pedirte nuevamente:
 • Tu usuario de GitHub
@@ -252,7 +272,9 @@ Git puede pedirte nuevamente:
 ## Tip de productividad: No escribir el token cada vez
 Ejecuta este comando después del push para que Git recuerde tus credenciales:
 <!-- -------------------------------------------------- -->
+```bash
 git config --global credential.helper store
+```
 <!-- -------------------------------------------------- -->
 Así no tendrás que pegar el token cada vez que haces push o pull.
 
@@ -346,6 +368,7 @@ Es una medida de seguridad: por defecto, las instancias no pueden acceder a otro
 3.	Haz clic en Create policy (Crear política).
 4.	Ve a la pestaña JSON y reemplaza el contenido con el siguiente código:
 <!-- -------------------------------------------------- -->
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -370,6 +393,7 @@ Es una medida de seguridad: por defecto, las instancias no pueden acceder a otro
     }
   ]
 }
+```
 📌 Esta política:
 • Permite obtener tokens y endpoints.
 • Autoriza lectura desde repositorios.
@@ -488,7 +512,11 @@ pwd
 Si no estás, navega hasta él:
 cd nextwork-web-project
 2.	Ejecuta el comando para compilar tu proyecto usando el archivo settings.xml que acabas de crear:
+
+```bash
 mvn -s settings.xml compile
+```
+
 3.	Observa la salida en la terminal:
 •	Deberías ver mensajes que indican que Maven está descargando paquetes desde el repositorio nextwork-devops-cicd (tu repositorio CodeArtifact).
 •	Al final, si todo sale bien, deberías ver un mensaje como:
@@ -499,14 +527,18 @@ Si ves un error de autenticación, prueba estos pasos:
 •	Confirma que estás usando las instrucciones de conexión para Linux/MacOS (aunque trabajes en Windows, si usas WSL o EC2).
 •	Verifica que el token de autorización existe y es correcto:
 <!-- -------------------------------------------------- -->
+```bash
 echo $CODEARTIFACT_AUTH_TOKEN
+```
 <!-- -------------------------------------------------- -->
 •	Revisa que tu archivo settings.xml coincida exactamente con las instrucciones de CodeArtifact.
 •	Asegúrate que la IAM Role con la política correcta está asociada a tu instancia EC2.
 •	Como último recurso, limpia el caché de Maven y vuelve a compilar:
 <!-- -------------------------------------------------- -->
+```bash
 rm -rf ~/.m2/repository
 mvn -s settings.xml compile
+```
 <!-- -------------------------------------------------- -->
 Paso 3: Verificar los paquetes en CodeArtifact
 •	Vuelve al navegador y recarga la consola de CodeArtifact.
@@ -666,6 +698,7 @@ Nómbralo buildspec.yml. Verifica cuidadosamente:
 • ¿Está ubicado en la raíz de tu proyecto, no dentro de subcarpetas como src o target?
 Pega el siguiente código para el archivo buildspec.yml:
 <!-- -------------------------------------------------- -->
+```yaml
 version: 0.2  
 phases:  
   install:  
@@ -687,7 +720,8 @@ phases:
 artifacts:  
   files:  
     - target/nextwork-web-project.war  
-  discard-paths: no  
+  discard-paths: no
+```
 <!-- -------------------------------------------------- -->
 💡 ¿Qué contiene buildspec.yml?
 Este archivo buildspec.yml es como una receta para construir tu aplicación web Java. Vamos a desglosarlo en términos simples:
@@ -715,17 +749,19 @@ Ahora, necesitamos hacer commit y push del archivo buildspec.yml a tu repositori
 <!-- -------------------------------------------------- -->
 Abre la terminal en VS Code (Ctrl+ o Cmd+).
 Ejecuta estos comandos Git:
+```bash
 git add .  
 git commit -m "Añadiendo archivo buildspec.yml"  
-git push  
+git push
+```
 <!-- -------------------------------------------------- -->
 🙋‍♀️ ¿Ves errores al hacer push?
 Prueba a resetear tus credenciales Git y comienza de nuevo. Ejecuta estos comandos:
-bash
-CopyEdit
+```bash
 git config --global --unset credential.helper  
 git config --local --unset credential.helper  
-git remote set-url origin https://<TU_NOMBRE_DE_USUARIO>@github.com/<TU_NOMBRE_DE_USUARIO>/<NOMBRE_DE_TU_REPOSITORIO>.git  
+git remote set-url origin https://<TU_NOMBRE_DE_USUARIO>@github.com/<TU_NOMBRE_DE_USUARIO>/<NOMBRE_DE_TU_REPOSITORIO>.git
+```
 Asegúrate de reemplazar <TU_NOMBRE_DE_USUARIO> y <NOMBRE_DE_TU_REPOSITORIO> por los valores correctos.
 Luego intenta hacer git push de nuevo e ingresa tu token PAT de GitHub cuando se te solicite.
 <!-- -------------------------------------------------- -->
@@ -768,8 +804,6 @@ codebuild-nextwork-devops-cicd-service-role
 Este es el rol que se creó automáticamente para tu proyecto de CodeBuild.
 5. Haz clic en Add permissions > Attach policies.
 6. En el buscador escribe:
-pgsql
-CopyEdit
 codeartifact-nextwork-consumer-policy  
 7.	Marca la casilla de esa política. Puedes expandirla para ver los permisos otorgados.
 8.	Haz clic en Add permissions.
@@ -787,7 +821,6 @@ Vamos a comprobar si el artefacto generado se subió correctamente a tu bucket S
 1.	Abre la consola de S3.
 2.	Haz clic en Buckets desde el menú lateral izquierdo.
 3.	Selecciona el bucket que creaste anteriormente, por ejemplo:
-CopyEdit
 nextwork-devops-cicd  
 4.	Si al principio está vacío, haz clic en Refresh para actualizar el contenido.
 <!-- -------------------------------------------------- -->
@@ -801,11 +834,8 @@ Piensa en esto como la prueba final de que tu proceso de CI está funcionando co
 <!-- -------------------------------------------------- -->
 🕵️‍♂️ ¿Lo encontraste?
 Deberías ver un archivo llamado:
-python
-CopyEdit
 nextwork-devops-cicd-artifact.zip  
 📥 Si lo descargas y lo inspeccionas, encontrarás dentro el archivo:
-CopyEdit
 nextwork-web-project.war  
 ¡Esto confirma que la compilación generó el archivo esperado! 🙌
 
@@ -824,6 +854,7 @@ Ya habíamos creado una instancia EC2 para desarrollo. Ahora lanzamos una instan
 • Selecciona: Template is ready.
 • Elige Upload a template file. ---
 <!-- -------------------------------------------------- -->
+```yaml
 AWSTemplateFormatVersion: 2010-09-09  
 Parameters:  
   AmazonLinuxAMIID:  
@@ -968,7 +999,8 @@ Outputs:
         - Fn::GetAtt:  
           - WebServer  
           - PublicIp  
-    Description: NextWork web server  
+    Description: NextWork web server
+``` 
 • Sube el archivo nextworkwebapp.yaml.
 <!-- -------------------------------------------------- -->
 3. Configura los detalles del stack
@@ -1036,6 +1068,7 @@ Son archivos que contienen comandos ejecutables por terminal para automatizar ta
 <!-- -------------------------------------------------- -->
 📍 Ubicación: `scripts/install_dependencies.sh`
 <!-- -------------------------------------------------- -->
+```bash
 #!/bin/bash
 sudo yum install tomcat -y
 sudo yum -y install httpd
@@ -1050,21 +1083,25 @@ sudo cat << EOF > /etc/httpd/conf.d/tomcat_manager.conf
   ProxyPassReverse / http://localhost:8080/nextwork-web-project/
 </VirtualHost>
 EOF
+```
 💡 Este script instala Tomcat y Apache, y configura Apache como reverse proxy hacia Tomcat.
 <!-- -------------------------------------------------- -->
 📄 start_server.sh
 📍 Ubicación: scripts/start_server.sh
 <!-- -------------------------------------------------- -->
+```bash
 #!/bin/bash
 sudo systemctl start tomcat.service
 sudo systemctl enable tomcat.service
 sudo systemctl start httpd.service
 sudo systemctl enable httpd.service
+```
 💡 Inicia los servicios y configura su arranque automático.
 <!-- -------------------------------------------------- -->
 📄 stop_server.sh
 📍 Ubicación: scripts/stop_server.sh
 <!-- -------------------------------------------------- -->
+```bash
 #!/bin/bash
 isExistApp="$(pgrep httpd)"
 if [[ -n $isExistApp ]]; then
@@ -1074,11 +1111,13 @@ isExistApp="$(pgrep tomcat)"
 if [[ -n $isExistApp ]]; then
   sudo systemctl stop tomcat.service
 fi
+```
 💡 Este script detiene Tomcat y Apache solo si están activos.
 <!-- -------------------------------------------------- -->
 📝 Crear archivo appspec.yml
 📍 Ubicación: raíz del proyecto (no dentro de scripts)
 <!-- -------------------------------------------------- -->
+```yaml
 version: 0.0
 os: linux
 files:
@@ -1097,36 +1136,45 @@ hooks:
     - location: scripts/start_server.sh
       timeout: 300
       runas: root
+```
 🧠 Define qué archivos copiar y cuándo ejecutar cada script.
 <!-- -------------------------------------------------- -->
 🛠️ Modificar buildspec.yml
 Agrega esta sección para incluir todos los archivos necesarios en el artefacto:
 <!-- -------------------------------------------------- -->
+```yaml
 artifacts:
   files:
     - target/nextwork-web-project.war
     - appspec.yml
     - scripts/**/*
   discard-paths: no
+```
   <!-- -------------------------------------------------- -->
 🔁 Hacer commit y push
 <!-- -------------------------------------------------- -->
+```bash
 git add .
 git commit -m "Adding CodeDeploy files"
 git push
+```
 <!-- -------------------------------------------------- -->
 💡 Verifica que scripts/ y appspec.yml estén en tu repositorio de GitHub.
 <!-- -------------------------------------------------- -->
 🛠️ ¿Problemas con git push?
 Ejecuta esto si necesitas restablecer credenciales:
 <!-- -------------------------------------------------- -->
+```bash
 git config --global --unset credential.helper
 git config --local --unset credential.helper
 git remote set-url origin https://<TU_USUARIO>@github.com/<TU_USUARIO>/<TU_REPO>.git
+```
 <!-- -------------------------------------------------- -->
 Luego vuelve a ejecutar:
 <!-- -------------------------------------------------- -->
+```bash
 git push
+```
 <!-- -------------------------------------------------- -->
 e ingresa tu GitHub Personal Access Token cuando se te pida.
 <!-- -------------------------------------------------- -->
@@ -1477,13 +1525,17 @@ En este paso vas a:
 Prueba el Pipeline con un Cambio en el Código
 Agrega una nueva línea en el archivo index.jsp:
 <!-- -------------------------------------------------- -->
+```html
 <p>If you see this line, that means your latest changes are automatically deployed</p>
+```
 <!-- -------------------------------------------------- -->
 Luego, haz commit y push de los cambios a tu repositorio en GitHub usando estos comandos:
 <!-- -------------------------------------------------- -->
+```bash
 git add .
 git commit -m "Update index.jsp with a new line to test CodePipeline"
 git push origin master
+```
 <!-- -------------------------------------------------- -->
 🙋‍♀️ ¿Ves errores al hacer push?
 Intenta restablecer tus credenciales de Git y empieza de nuevo. Ejecuta estos comandos en tu terminal:
