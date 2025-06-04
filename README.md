@@ -67,16 +67,26 @@ Este repositorio documenta cómo configuré un entorno de CI/CD en AWS para desp
 ---
 🔐 
 ## Configuración de un Usuario IAM
+<!-- -------------------------------------------------- -->
 Desde la consola de AWS:
+<!-- -------------------------------------------------- -->
 •	Inicio de sesión:
+<!-- -------------------------------------------------- -->
 Inicia sesión en la Consola de AWS como usuario raíz (root user).
+<!-- -------------------------------------------------- -->
 •	¿Qué es un usuario IAM y por qué crearlo?
+<!-- -------------------------------------------------- -->
 En AWS, los usuarios IAM permiten controlar de forma segura quién puede acceder a qué recursos.
+<!-- -------------------------------------------------- -->
 El usuario raíz es el acceso principal a la cuenta, pero por seguridad NO debes usarlo para tareas del día a día.
+<!-- -------------------------------------------------- -->
 En su lugar, crea un usuario IAM con permisos administrativos.
+<!-- -------------------------------------------------- -->
 Piensa en el usuario root como una llave maestra, y los usuarios IAM como copias con permisos definidos.
+<!-- -------------------------------------------------- -->
 ________________________________________
 🧰 Pasos para crear un usuario IAM
+<!-- -------------------------------------------------- -->
 1.	Abre la Consola de IAM.
 2.	En el menú lateral izquierdo, haz clic en Users.
 3.	Haz clic en Create user.
