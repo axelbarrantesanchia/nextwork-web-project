@@ -1240,10 +1240,10 @@ Esto significa que ahora, otros desarrolladores o sistemas de CI/CD en tu organi
 🔧  
 ## Connect CodeBuild to your GitHub Repository (continuación)
 <!-- -------------------------------------------------- -->
-Connect CodeBuild to GitHub using CodeConnections
-
+1. Conecta CodeBuild a GitHub usando CodeConnections
 <!-- -------------------------------------------------- -->
-• Ingresa a la consola de AWS CodeBuild desde https://console.aws.amazon.com/codebuild.
+• Ingresa a la consola de AWS CodeBuild desde:
+https://console.aws.amazon.com/codebuild
 
 <!-- -------------------------------------------------- -->
 • Haz clic en Create build project para comenzar la configuración de un nuevo proyecto.
@@ -1251,298 +1251,192 @@ Connect CodeBuild to GitHub using CodeConnections
 <!-- -------------------------------------------------- -->
 • En la sección Source > Credential, si ves el mensaje:
 
-<!-- -------------------------------------------------- -->
 You have not connected to GitHub. Manage account credentials.
 
-<!-- -------------------------------------------------- -->
 haz clic en Manage account credentials.
 
 <!-- -------------------------------------------------- -->
 • Serás redirigido a la página Manage default source credential.
 
 <!-- -------------------------------------------------- -->
-o Asegúrate de que GitHub App esté seleccionado como tipo de credencial.
+o Asegúrate de que esté seleccionado GitHub App como tipo de credencial.
 
-<!-- -------------------------------------------------- -->
-💡 Este método es el más seguro y recomendado, ya que AWS gestiona el acceso de forma nativa, sin requerir tokens personales.
+💡 Este método es el más seguro y recomendado, ya que AWS gestiona el acceso sin requerir tokens personales.
 
 <!-- -------------------------------------------------- -->
 • Haz clic en Create a new GitHub connection.
 
 <!-- -------------------------------------------------- -->
 o En Connection name, escribe:
-
-<!-- -------------------------------------------------- -->
 nextwork-devops-cicd
 
 <!-- -------------------------------------------------- -->
 o Luego haz clic en Connect to GitHub.
 
 <!-- -------------------------------------------------- -->
-• Serás redirigido a GitHub para autorizar la app AWS Connector for GitHub.
+• Autoriza la app AWS Connector for GitHub:
 
-<!-- -------------------------------------------------- -->
-o Selecciona la cuenta de GitHub que contiene tu repositorio.
-
-<!-- -------------------------------------------------- -->
+o Selecciona tu cuenta de GitHub.
 o Haz clic en Select.
 
 <!-- -------------------------------------------------- -->
-• Serás redirigido nuevamente a la consola de AWS.
+• Serás redirigido nuevamente a AWS:
 
-<!-- -------------------------------------------------- -->
 o En la sección GitHub Apps, selecciona tu usuario.
-
-<!-- -------------------------------------------------- -->
 o Haz clic en Connect.
 
 <!-- -------------------------------------------------- -->
-• De regreso en la página Manage default source credential,
+• Verás tu nueva conexión listada.
+Haz clic en Save.
+
+💡 Guardar la conexión como predeterminada te permitirá reutilizarla fácilmente en el futuro.
 
 <!-- -------------------------------------------------- -->
-verás tu nueva conexión listada.
+• Regresa a la página Create build project.
 
 <!-- -------------------------------------------------- -->
-o Haz clic en Save.
+o En la sección Source, deberías ver el mensaje verde:
 
-<!-- -------------------------------------------------- -->
-💡 ¿Por qué guardar esta conexión?
-
-<!-- -------------------------------------------------- -->
-Guardar la conexión como predeterminada te permite reutilizarla fácilmente en futuros proyectos de CodeBuild sin repetir la configuración.
-
-<!-- -------------------------------------------------- -->
-• Ahora regresa a la página Create build project.
-
-<!-- -------------------------------------------------- -->
-o En la sección Source, deberías ver el mensaje en verde:
-
-<!-- -------------------------------------------------- -->
 Your account is successfully connected by using an AWS managed GitHub App.
 
-<!-- -------------------------------------------------- -->
 🙋‍♀️ ¿Aún ves “You have not connected to GitHub”?
 
-<!-- -------------------------------------------------- -->
 o Refresca completamente la página.
-o Repite cuidadosamente los pasos de conexión.
-o Asegúrate de autorizar correctamente la app en GitHub.
-o Si el problema persiste, borra el caché del navegador o intenta con otro navegador.
+o Repite los pasos de conexión.
+o Verifica que la app fue autorizada correctamente.
+o Si persiste, borra el caché o intenta con otro navegador.
 
+2. Selecciona tu Repositorio de GitHub
 <!-- -------------------------------------------------- -->
-💡 ¿Qué servicio conecta AWS con GitHub?
+• En la sección Source, selecciona tu repositorio privado:
+nextwork-web-project
 
-<!-- -------------------------------------------------- -->
-AWS CodeConnections es el servicio que actúa como puente seguro entre AWS y repositorios externos como GitHub, sin gestionar directamente tokens o claves.
+Esto permitirá que CodeBuild obtenga el código directamente desde GitHub en cada build.
 
+3. Configura el Proyecto de CodeBuild
 <!-- -------------------------------------------------- -->
-• (Opcional) Puedes ver o administrar tus conexiones:
+🔹 Build Environment
+<!-- -------------------------------------------------- -->
+• Primary source webhook events:
+Desmarca:
 
-<!-- -------------------------------------------------- -->
-o En el menú lateral, expande Settings y haz clic en Connections.
-
-<!-- -------------------------------------------------- --> <!-- -------------------------------------------------- -->
-Próximos pasos para configurar CodeBuild con GitHub
-
-<!-- -------------------------------------------------- -->
-Selecciona tu repositorio GitHub en CodeBuild
-
-<!-- -------------------------------------------------- -->
-o Luego de conectar exitosamente tu cuenta de GitHub con AWS mediante CodeConnections, en la consola de CodeBuild, en la sección Source, podrás seleccionar tu repositorio nextwork-web-project como fuente de código.
-
-<!-- -------------------------------------------------- -->
-o Esto permitirá que CodeBuild obtenga directamente el código desde tu repositorio privado cada vez que ejecutes un build o configures un pipeline.
-
-<!-- -------------------------------------------------- -->
-Configura los detalles del proyecto de CodeBuild
-
-<!-- -------------------------------------------------- -->
-o Build environment (Entorno de compilación):
-
-<!-- -------------------------------------------------- -->
-▪ Selecciona una imagen adecuada para tu proyecto (por ejemplo, una imagen estándar de Amazon Linux con soporte para Maven si usas Java).
-
-<!-- -------------------------------------------------- -->
-▪ Configura la versión de runtime requerida.
-
-<!-- -------------------------------------------------- -->
-o Buildspec:
-
-<!-- -------------------------------------------------- -->
-▪ Usa un archivo buildspec.yml en la raíz del repositorio para definir los comandos de compilación y pruebas.
-
-<!-- -------------------------------------------------- -->
-▪ Alternativamente, puedes ingresar los comandos directamente desde la consola de CodeBuild.
-
-<!-- -------------------------------------------------- -->
-o Service Role (Rol de servicio):
-
-<!-- -------------------------------------------------- -->
-▪ Asegúrate de asignar un rol de IAM a CodeBuild con los permisos necesarios para acceder a servicios como CodeArtifact, S3 u otros recursos utilizados por el proceso de build.
-
-<!-- -------------------------------------------------- -->
-Ejecuta un build para probar la integración
-
-<!-- -------------------------------------------------- -->
-o Lanza una compilación manual desde CodeBuild para verificar que:
-
-<!-- -------------------------------------------------- -->
-▪ El código se descarga correctamente desde GitHub.
-
-<!-- -------------------------------------------------- -->
-▪ Los paquetes de Maven se obtienen desde CodeArtifact (si fue configurado previamente).
-
-<!-- -------------------------------------------------- -->
-▪ El proyecto se compila sin errores.
-
-<!-- -------------------------------------------------- -->
-o Revisa los logs de compilación para confirmar que todo funciona como se espera.
-
-<!-- -------------------------------------------------- -->
-¿Por qué usar CodeConnections para conectar CodeBuild y GitHub?
-
-<!-- -------------------------------------------------- -->
-• Seguridad: AWS administra la autenticación de manera interna, evitando el uso de credenciales sensibles.
-
-<!-- -------------------------------------------------- -->
-• Facilidad: Solo necesitas configurar la conexión una vez y podrás reutilizarla.
-
-<!-- -------------------------------------------------- -->
-• Confiabilidad: Minimiza errores causados por tokens vencidos o configuraciones manuales incorrectas.
-
-<!-- -------------------------------------------------- -->
-Recapitulando
-
-<!-- -------------------------------------------------- -->
-• AWS CodeConnections establece un vínculo seguro entre CodeBuild y tu repositorio privado de GitHub.
-
-<!-- -------------------------------------------------- -->
-• Permite que CodeBuild acceda automáticamente a tu código fuente de forma segura.
-
-<!-- -------------------------------------------------- -->
-• Con esta integración puedes automatizar compilaciones, pruebas y despliegues en AWS de forma eficiente y confiable.
-
-
-⚙️  
-## Finish Setting Up Your CodeBuild Project
-<!-- -------------------------------------------------- -->
-1. Configure Build Environment
-<!-- -------------------------------------------------- -->
-•	Primary source webhook events:
-<!-- -------------------------------------------------- -->
-o	Desmarca la casilla que dice:
-<!-- -------------------------------------------------- -->
 "Rebuild every time a code change is pushed to this repository."
-<!-- -------------------------------------------------- -->
-Esto evita builds automáticos. Por ahora usaremos ejecución manual.
-<!-- -------------------------------------------------- -->
-•	Environment > Compute > Provisioning model:
-<!-- -------------------------------------------------- -->
-o	Selecciona On-demand.
-<!-- -------------------------------------------------- -->
-Crea los recursos solo cuando los necesites.
-<!-- -------------------------------------------------- -->
-•	Environment > Environment image:
-<!-- -------------------------------------------------- -->
-o	Selecciona Managed image.
-<!-- -------------------------------------------------- -->
-•	Environment > Compute type:
-<!-- -------------------------------------------------- -->
-o	Selecciona EC2.
-<!-- -------------------------------------------------- -->
-Recomendado porque Java Corretto 8 no está soportado en Lambda.
-<!-- -------------------------------------------------- -->
-•	Environment > Operating system:
-<!-- -------------------------------------------------- -->
-o	Selecciona Amazon Linux.
-<!-- -------------------------------------------------- -->
-•	Environment > Runtime(s):
-<!-- -------------------------------------------------- -->
-o	Selecciona Standard.
-<!-- -------------------------------------------------- -->
-•	Environment > Image:
-<!-- -------------------------------------------------- -->
-o	Escoge aws/codebuild/amazonlinux-x86_64-standard:corretto8.
-<!-- -------------------------------------------------- -->
-o	Mantén la opción:
-<!-- -------------------------------------------------- -->
-“Always use the latest image for this runtime version”.
-<!-- -------------------------------------------------- -->
-•	Service role:
-<!-- -------------------------------------------------- -->
-o	Selecciona New service role para que AWS cree uno por ti.
-<!-- -------------------------------------------------- -->
-2. Specify Build Instructions (buildspec)
-<!-- -------------------------------------------------- -->
-•	En la sección Buildspec:
-<!-- -------------------------------------------------- -->
-o	Selecciona Use a buildspec file.
-<!-- -------------------------------------------------- -->
-o	Deja el nombre como: buildspec.yml.
-<!-- -------------------------------------------------- -->
-Este archivo debe estar en la raíz de tu repositorio.
-<!-- -------------------------------------------------- -->
-3. Batch Configuration (Opcional)
-<!-- -------------------------------------------------- -->
-•	Puedes ignorar esta sección por ahora.
-<!-- -------------------------------------------------- -->
-No usaremos builds en batch.
-<!-- -------------------------------------------------- -->
-4. Configure Build Artifacts
-<!-- -------------------------------------------------- -->
-•	En la sección Artifacts:
-<!-- -------------------------------------------------- -->
-o	Para Type, selecciona Amazon S3.
-<!-- -------------------------------------------------- -->
-5. Crear Bucket en Amazon S3 para los artefactos
-<!-- -------------------------------------------------- -->
-•	Ve a la consola de S3 (busca “S3” en la barra superior de AWS).
-<!-- -------------------------------------------------- -->
-•	Asegúrate de estar en la misma región que tu proyecto CodeBuild.
-<!-- -------------------------------------------------- -->
-•	Haz clic en Create bucket.
-<!-- -------------------------------------------------- -->
-•	En Bucket name, escribe:
-<!-- -------------------------------------------------- -->
-nextwork-devops-cicd-yourname (reemplaza yourname).
+(Evitamos builds automáticos por ahora.)
 
-•	Deja las demás opciones por defecto y crea el bucket.
 <!-- -------------------------------------------------- -->
-6. Volver a CodeBuild y elegir el bucket
+• Environment > Compute > Provisioning model:
+Selecciona On-demand
+
 <!-- -------------------------------------------------- -->
-•	Vuelve a la consola de CodeBuild.
+• Environment > Environment image:
+Selecciona Managed image
+
 <!-- -------------------------------------------------- -->
-•	Si no aparece el bucket, refresca la página.
+• Environment > Compute type:
+Selecciona EC2
+💡 Recomendado porque Java Corretto 8 no está soportado en Lambda.
+
 <!-- -------------------------------------------------- -->
-•	En Artifacts > Bucket name, selecciona el bucket recién creado.
+• Environment > Operating system:
+Selecciona Amazon Linux
+
 <!-- -------------------------------------------------- -->
-•	En Name, escribe: nextwork-devops-cicd-artifact.
+• Environment > Runtime(s):
+Selecciona Standard
+
 <!-- -------------------------------------------------- -->
-•	En Artifacts packaging, selecciona Zip.
+• Environment > Image:
+Escoge:
+aws/codebuild/amazonlinux-x86_64-standard:corretto8
+
+o Mantén seleccionada la opción:
+
+Always use the latest image for this runtime version.
+
 <!-- -------------------------------------------------- -->
-7. Configurar CloudWatch Logs para monitorear el build
+• Service role:
+Selecciona New service role para que AWS cree una automáticamente.
+
+4. Especifica las Instrucciones de Build (buildspec)
 <!-- -------------------------------------------------- -->
-•	En la sección Logs:
+• En la sección Buildspec:
+Selecciona Use a buildspec file
+
+o Deja el nombre como:
+buildspec.yml
+
+💡 Este archivo debe estar en la raíz del repositorio.
+
+5. Configura los Artefactos de Salida
 <!-- -------------------------------------------------- -->
-o	Marca la opción CloudWatch logs.
+• En la sección Artifacts > Type:
+Selecciona Amazon S3
+
+6. Crea un Bucket S3 para los Artefactos
 <!-- -------------------------------------------------- -->
-o	En Group name, escribe:
+• Ve a la consola de S3
+
+• Asegúrate de estar en la misma región que tu proyecto CodeBuild
+
+• Haz clic en Create bucket
+
+• En Bucket name, escribe:
+nextwork-devops-cicd-yourname (reemplaza yourname)
+
+• Deja el resto por defecto y crea el bucket.
+
+7. Vuelve a CodeBuild y Selecciona el Bucket
 <!-- -------------------------------------------------- -->
+• Si no aparece el bucket, refresca la página
+
+• En Artifacts > Bucket name, selecciona el bucket recién creado
+
+• En Name, escribe:
+nextwork-devops-cicd-artifact
+
+• En Artifacts packaging, selecciona Zip
+
+8. Configura Logs de CloudWatch
+<!-- -------------------------------------------------- -->
+• En la sección Logs:
+
+o Marca la opción CloudWatch logs
+
+o En Group name, escribe:
 /aws/codebuild/nextwork-devops-cicd
-<!-- -------------------------------------------------- -->
-8. Crear el proyecto
-<!-- -------------------------------------------------- -->
-•	Desplázate hasta el final y haz clic en Create build project.
-<!-- -------------------------------------------------- -->
-¿Qué sigue?
-<!-- -------------------------------------------------- -->
-•	Puedes iniciar tu primer build manual para validar la configuración.
-<!-- -------------------------------------------------- -->
-•	Revisa los logs en CloudWatch para depuración.
-<!-- -------------------------------------------------- -->
-•	Cuando el build termine, el archivo .war empaquetado estará disponible en tu bucket S3, listo para desplegar.
-<!-- -------------------------------------------------- -->
 
+9. Finaliza la Creación del Proyecto
+<!-- -------------------------------------------------- -->
+• Haz clic en Create build project al final del formulario.
+
+🚀 ¿Qué sigue?
+<!-- -------------------------------------------------- -->
+• Ejecuta un build manual desde la consola de CodeBuild.
+
+<!-- -------------------------------------------------- -->
+• Verifica:
+
+o Que el código se descargue correctamente desde GitHub.
+o Que se obtengan los paquetes desde CodeArtifact (si aplica).
+o Que el proyecto compile sin errores.
+
+<!-- -------------------------------------------------- -->
+• Revisa los logs en CloudWatch para depuración.
+
+<!-- -------------------------------------------------- -->
+• Una vez finalizado, el archivo .war estará en tu bucket S3, listo para desplegar.
+
+🔒 ¿Por qué usar CodeConnections?
+<!-- -------------------------------------------------- -->
+• Seguridad: AWS gestiona la autenticación internamente.
+• Facilidad: Configuración única reutilizable.
+• Confiabilidad: Sin tokens expirados ni configuraciones manuales propensas a errores.
+
+✅ Recapitulando
+<!-- -------------------------------------------------- -->
+• AWS CodeConnections permite una integración segura con GitHub.
+• CodeBuild accede automáticamente a tu código fuente.
+• Puedes automatizar compilaciones, pruebas y despliegues en AWS de forma eficiente.
 
 🐞  
 ## Ejecutar la compilación y solucionar fallos
