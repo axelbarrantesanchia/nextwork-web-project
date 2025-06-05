@@ -1240,7 +1240,14 @@ Esto significa que ahora, otros desarrolladores o sistemas de CI/CD en tu organi
 🔧  
 ## Connect CodeBuild to your GitHub Repository (continuación)
 <!-- -------------------------------------------------- -->
-0. Connect CodeBuild to GitHub using CodeConnections
+Connect CodeBuild to GitHub using CodeConnections
+
+<!-- -------------------------------------------------- -->
+• Ingresa a la consola de AWS CodeBuild desde https://console.aws.amazon.com/codebuild.
+
+<!-- -------------------------------------------------- -->
+• Haz clic en Create build project para comenzar la configuración de un nuevo proyecto.
+
 <!-- -------------------------------------------------- -->
 • En la sección Source > Credential, si ves el mensaje:
 
@@ -1257,7 +1264,7 @@ haz clic en Manage account credentials.
 o Asegúrate de que GitHub App esté seleccionado como tipo de credencial.
 
 <!-- -------------------------------------------------- -->
-💡 Este método es el más seguro y recomendado, ya que AWS gestiona el acceso sin necesidad de tokens personales.
+💡 Este método es el más seguro y recomendado, ya que AWS gestiona el acceso de forma nativa, sin requerir tokens personales.
 
 <!-- -------------------------------------------------- -->
 • Haz clic en Create a new GitHub connection.
@@ -1269,13 +1276,13 @@ o En Connection name, escribe:
 nextwork-devops-cicd
 
 <!-- -------------------------------------------------- -->
-o Haz clic en Connect to GitHub.
+o Luego haz clic en Connect to GitHub.
 
 <!-- -------------------------------------------------- -->
-• Serás llevado a GitHub para autorizar la aplicación AWS Connector for GitHub.
+• Serás redirigido a GitHub para autorizar la app AWS Connector for GitHub.
 
 <!-- -------------------------------------------------- -->
-o Selecciona tu cuenta de GitHub que contiene el repositorio.
+o Selecciona la cuenta de GitHub que contiene tu repositorio.
 
 <!-- -------------------------------------------------- -->
 o Haz clic en Select.
@@ -1284,7 +1291,7 @@ o Haz clic en Select.
 • Serás redirigido nuevamente a la consola de AWS.
 
 <!-- -------------------------------------------------- -->
-o En GitHub Apps, selecciona tu usuario.
+o En la sección GitHub Apps, selecciona tu usuario.
 
 <!-- -------------------------------------------------- -->
 o Haz clic en Connect.
@@ -1302,95 +1309,118 @@ o Haz clic en Save.
 💡 ¿Por qué guardar esta conexión?
 
 <!-- -------------------------------------------------- -->
-Guardar la conexión como predeterminada facilita su uso en futuros proyectos de CodeBuild sin repetir este proceso.
+Guardar la conexión como predeterminada te permite reutilizarla fácilmente en futuros proyectos de CodeBuild sin repetir la configuración.
 
 <!-- -------------------------------------------------- -->
-• Ahora, regresa a la página Create build project.
+• Ahora regresa a la página Create build project.
 
 <!-- -------------------------------------------------- -->
-o En la sección Source, deberías ver un mensaje en verde:
+o En la sección Source, deberías ver el mensaje en verde:
 
 <!-- -------------------------------------------------- -->
 Your account is successfully connected by using an AWS managed GitHub App.
 
 <!-- -------------------------------------------------- -->
-🙋‍♀️ ¿Sigues viendo “You have not connected to GitHub”?
+🙋‍♀️ ¿Aún ves “You have not connected to GitHub”?
 
 <!-- -------------------------------------------------- -->
-o Refresca la página completamente.
-o Repite con cuidado los pasos de conexión.
-o Autoriza correctamente la app en GitHub.
-o Si persiste, borra el caché del navegador o intenta con otro.
+o Refresca completamente la página.
+o Repite cuidadosamente los pasos de conexión.
+o Asegúrate de autorizar correctamente la app en GitHub.
+o Si el problema persiste, borra el caché del navegador o intenta con otro navegador.
 
 <!-- -------------------------------------------------- -->
 💡 ¿Qué servicio conecta AWS con GitHub?
 
 <!-- -------------------------------------------------- -->
-Esto lo realiza AWS CodeConnections, el cual actúa como un puente seguro entre AWS y repositorios externos como GitHub, sin manejar tokens ni claves directamente.
+AWS CodeConnections es el servicio que actúa como puente seguro entre AWS y repositorios externos como GitHub, sin gestionar directamente tokens o claves.
 
 <!-- -------------------------------------------------- -->
 • (Opcional) Puedes ver o administrar tus conexiones:
 
 <!-- -------------------------------------------------- -->
-o En el menú lateral, expande Settings al final y haz clic en Connections.
+o En el menú lateral, expande Settings y haz clic en Connections.
 
-<!-- -------------------------------------------------- -->
-<!-- -------------------------------------------------- -->
+<!-- -------------------------------------------------- --> <!-- -------------------------------------------------- -->
 Próximos pasos para configurar CodeBuild con GitHub
-<!-- -------------------------------------------------- -->
 
-1.	Selecciona tu repositorio GitHub en CodeBuild
 <!-- -------------------------------------------------- -->
-o	Después de haber conectado exitosamente tu cuenta GitHub con AWS a través de CodeConnections, en la consola de CodeBuild, en la sección Source, ahora podrás seleccionar tu repositorio nextwork-web-project como 
-fuente del código.
+Selecciona tu repositorio GitHub en CodeBuild
+
 <!-- -------------------------------------------------- -->
-o	Esto permitirá que CodeBuild extraiga directamente el código desde tu repositorio privado cada vez que ejecutes un build o configures un pipeline.
+o Luego de conectar exitosamente tu cuenta de GitHub con AWS mediante CodeConnections, en la consola de CodeBuild, en la sección Source, podrás seleccionar tu repositorio nextwork-web-project como fuente de código.
+
 <!-- -------------------------------------------------- -->
-2.	Configura los detalles del proyecto de CodeBuild
+o Esto permitirá que CodeBuild obtenga directamente el código desde tu repositorio privado cada vez que ejecutes un build o configures un pipeline.
+
 <!-- -------------------------------------------------- -->
-o	Build environment (Entorno de compilación):
+Configura los detalles del proyecto de CodeBuild
+
 <!-- -------------------------------------------------- -->
-	Selecciona una imagen de entorno adecuada para tu proyecto (por ejemplo, una imagen estándar de Amazon Linux con soporte para Maven si estás usando Java).
+o Build environment (Entorno de compilación):
+
 <!-- -------------------------------------------------- -->
-	Configura la versión de runtime que necesitas.
+▪ Selecciona una imagen adecuada para tu proyecto (por ejemplo, una imagen estándar de Amazon Linux con soporte para Maven si usas Java).
+
 <!-- -------------------------------------------------- -->
-o	Buildspec:
+▪ Configura la versión de runtime requerida.
+
 <!-- -------------------------------------------------- -->
-	Puedes usar un archivo buildspec.yml en la raíz de tu repositorio para definir los comandos de compilación y pruebas.
+o Buildspec:
+
 <!-- -------------------------------------------------- -->
-	Alternativamente, puedes ingresar comandos directamente en la consola de CodeBuild.
+▪ Usa un archivo buildspec.yml en la raíz del repositorio para definir los comandos de compilación y pruebas.
+
 <!-- -------------------------------------------------- -->
-o	Service Role (Rol de servicio):
+▪ Alternativamente, puedes ingresar los comandos directamente desde la consola de CodeBuild.
+
 <!-- -------------------------------------------------- -->
-	Asegúrate de que CodeBuild tenga un rol IAM con los permisos necesarios para acceder a CodeArtifact y a otros recursos que tu build necesite (por ejemplo, permisos para obtener paquetes, acceder a S3, etc.).
+o Service Role (Rol de servicio):
+
 <!-- -------------------------------------------------- -->
-3.	Ejecuta un build para probar la integración
+▪ Asegúrate de asignar un rol de IAM a CodeBuild con los permisos necesarios para acceder a servicios como CodeArtifact, S3 u otros recursos utilizados por el proceso de build.
+
 <!-- -------------------------------------------------- -->
-o	Ejecuta una compilación manual en CodeBuild para asegurarte que:
+Ejecuta un build para probar la integración
+
 <!-- -------------------------------------------------- -->
-	El código se baja correctamente desde tu repositorio GitHub.
+o Lanza una compilación manual desde CodeBuild para verificar que:
+
 <!-- -------------------------------------------------- -->
-	Los paquetes Maven se descargan desde CodeArtifact (confirmado en el paso anterior).
+▪ El código se descarga correctamente desde GitHub.
+
 <!-- -------------------------------------------------- -->
-	El proyecto compila sin errores.
+▪ Los paquetes de Maven se obtienen desde CodeArtifact (si fue configurado previamente).
+
 <!-- -------------------------------------------------- -->
-o	Observa los logs de build para verificar que todo está funcionando como se espera.
+▪ El proyecto se compila sin errores.
+
+<!-- -------------------------------------------------- -->
+o Revisa los logs de compilación para confirmar que todo funciona como se espera.
+
 <!-- -------------------------------------------------- -->
 ¿Por qué usar CodeConnections para conectar CodeBuild y GitHub?
+
 <!-- -------------------------------------------------- -->
-•	Seguridad: AWS maneja la autenticación y el token de acceso, eliminando la necesidad de almacenar credenciales sensibles manualmente.
+• Seguridad: AWS administra la autenticación de manera interna, evitando el uso de credenciales sensibles.
+
 <!-- -------------------------------------------------- -->
-•	Facilidad: Configurar la conexión una sola vez y reutilizarla para varios proyectos o builds.
+• Facilidad: Solo necesitas configurar la conexión una vez y podrás reutilizarla.
+
 <!-- -------------------------------------------------- -->
-•	Confiabilidad: Reduce errores humanos y problemas por tokens caducados o mal configurados.
+• Confiabilidad: Minimiza errores causados por tokens vencidos o configuraciones manuales incorrectas.
+
 <!-- -------------------------------------------------- -->
 Recapitulando
+
 <!-- -------------------------------------------------- -->
-•	AWS CodeConnections actúa como puente seguro entre CodeBuild y tu repositorio GitHub privado.
+• AWS CodeConnections establece un vínculo seguro entre CodeBuild y tu repositorio privado de GitHub.
+
 <!-- -------------------------------------------------- -->
-•	Con esta conexión, CodeBuild puede extraer tu código fuente de forma automática y segura.
+• Permite que CodeBuild acceda automáticamente a tu código fuente de forma segura.
+
 <!-- -------------------------------------------------- -->
-•	La integración completa te permite automatizar la compilación, pruebas y despliegue en AWS de forma confiable y controlada.
+• Con esta integración puedes automatizar compilaciones, pruebas y despliegues en AWS de forma eficiente y confiable.
 
 
 ⚙️  
