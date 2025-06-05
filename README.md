@@ -1240,6 +1240,102 @@ Esto significa que ahora, otros desarrolladores o sistemas de CI/CD en tu organi
 🔧  
 ## Connect CodeBuild to your GitHub Repository (continuación)
 <!-- -------------------------------------------------- -->
+0. Connect CodeBuild to GitHub using CodeConnections
+<!-- -------------------------------------------------- -->
+• En la sección Source > Credential, si ves el mensaje:
+
+<!-- -------------------------------------------------- -->
+You have not connected to GitHub. Manage account credentials.
+
+<!-- -------------------------------------------------- -->
+haz clic en Manage account credentials.
+
+<!-- -------------------------------------------------- -->
+• Serás redirigido a la página Manage default source credential.
+
+<!-- -------------------------------------------------- -->
+o Asegúrate de que GitHub App esté seleccionado como tipo de credencial.
+
+<!-- -------------------------------------------------- -->
+💡 Este método es el más seguro y recomendado, ya que AWS gestiona el acceso sin necesidad de tokens personales.
+
+<!-- -------------------------------------------------- -->
+• Haz clic en Create a new GitHub connection.
+
+<!-- -------------------------------------------------- -->
+o En Connection name, escribe:
+
+<!-- -------------------------------------------------- -->
+nextwork-devops-cicd
+
+<!-- -------------------------------------------------- -->
+o Haz clic en Connect to GitHub.
+
+<!-- -------------------------------------------------- -->
+• Serás llevado a GitHub para autorizar la aplicación AWS Connector for GitHub.
+
+<!-- -------------------------------------------------- -->
+o Selecciona tu cuenta de GitHub que contiene el repositorio.
+
+<!-- -------------------------------------------------- -->
+o Haz clic en Select.
+
+<!-- -------------------------------------------------- -->
+• Serás redirigido nuevamente a la consola de AWS.
+
+<!-- -------------------------------------------------- -->
+o En GitHub Apps, selecciona tu usuario.
+
+<!-- -------------------------------------------------- -->
+o Haz clic en Connect.
+
+<!-- -------------------------------------------------- -->
+• De regreso en la página Manage default source credential,
+
+<!-- -------------------------------------------------- -->
+verás tu nueva conexión listada.
+
+<!-- -------------------------------------------------- -->
+o Haz clic en Save.
+
+<!-- -------------------------------------------------- -->
+💡 ¿Por qué guardar esta conexión?
+
+<!-- -------------------------------------------------- -->
+Guardar la conexión como predeterminada facilita su uso en futuros proyectos de CodeBuild sin repetir este proceso.
+
+<!-- -------------------------------------------------- -->
+• Ahora, regresa a la página Create build project.
+
+<!-- -------------------------------------------------- -->
+o En la sección Source, deberías ver un mensaje en verde:
+
+<!-- -------------------------------------------------- -->
+Your account is successfully connected by using an AWS managed GitHub App.
+
+<!-- -------------------------------------------------- -->
+🙋‍♀️ ¿Sigues viendo “You have not connected to GitHub”?
+
+<!-- -------------------------------------------------- -->
+o Refresca la página completamente.
+o Repite con cuidado los pasos de conexión.
+o Autoriza correctamente la app en GitHub.
+o Si persiste, borra el caché del navegador o intenta con otro.
+
+<!-- -------------------------------------------------- -->
+💡 ¿Qué servicio conecta AWS con GitHub?
+
+<!-- -------------------------------------------------- -->
+Esto lo realiza AWS CodeConnections, el cual actúa como un puente seguro entre AWS y repositorios externos como GitHub, sin manejar tokens ni claves directamente.
+
+<!-- -------------------------------------------------- -->
+• (Opcional) Puedes ver o administrar tus conexiones:
+
+<!-- -------------------------------------------------- -->
+o En el menú lateral, expande Settings al final y haz clic en Connections.
+
+<!-- -------------------------------------------------- -->
+<!-- -------------------------------------------------- -->
 Próximos pasos para configurar CodeBuild con GitHub
 <!-- -------------------------------------------------- -->
 
